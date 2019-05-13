@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/easysui-all" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/easysui-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/easysui-log" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/easysui-mybatis" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/easysui-validate" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/easysui-web" charset="UTF-8" />
+  </component>
+</project>

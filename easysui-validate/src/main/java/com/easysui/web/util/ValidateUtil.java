@@ -19,16 +19,20 @@ public class ValidateUtil {
 
     private static final Validator VALIDATOR = Validation.buildDefaultValidatorFactory().getValidator();
 
+    @SuppressWarnings("unchecked")
     public static <T> Result<String> validate(List<T> objects) {
         for (T obj : objects) {
             Set<ConstraintViolation<T>> validateSet = VALIDATOR.validate(obj);
             if (CollectionUtils.isNotEmpty(validateSet)) {
                 StringBuilder builder = new StringBuilder();
                 for (ConstraintViolation<T> v : validateSet) {
-                    log.info("前置参数校验 - 校验到异常参数 {}: {}", v.getPropertyPath().toString(), v.getMessage());
-                    builder.append(v.getMessage()).append("|");
+                    log.info("前置参数校验-校验到异常参数 {}={}", v.getPropertyPath().toString(), v.getMessage());
+                    if (builder.length() > 0) {
+                        builder.append("|");
+                    }
+                    builder.append(v.getMessage());
                 }
-                return Result.error(builder.toString(),StringUtils.EMPTY);
+                return Result.error(builder.toString(), StringUtils.EMPTY);
             }
         }
         return Result.ok(StringUtils.EMPTY);

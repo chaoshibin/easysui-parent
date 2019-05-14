@@ -32,11 +32,9 @@ public class EasyValidateAspect {
         Result<String> result = ValidateUtil.validate(Arrays.asList(joinPoint.getArgs()));
         //验证失败
         if (result.isError()) {
-            //注解方法
-            Method sourceMethod = AspectUtil.getMethod(joinPoint);
             //返回类型
             Class<?> returnType = AspectUtil.getReturnType(joinPoint);
-            EasyValidate easyValidateAnnotation = sourceMethod.getAnnotation(EasyValidate.class);
+            EasyValidate easyValidateAnnotation = AspectUtil.getMethod(joinPoint).getAnnotation(EasyValidate.class);
             //返回码属性域
             String codeField = easyValidateAnnotation.codeField();
             //返回信息属性域

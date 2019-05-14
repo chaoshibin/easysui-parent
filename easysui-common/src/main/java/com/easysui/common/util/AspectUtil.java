@@ -28,14 +28,14 @@ public class AspectUtil {
     }
 
     /**
-     * 获取注解方法
+     * 获取方法名
      *
      * @param jp
      * @return
      */
     public static String getMethodName(JoinPoint jp) {
-        //return jp.getSignature().getName();
-        return getMethod(jp).getName();
+        MethodSignature signature = (MethodSignature) jp.getSignature();
+        return signature.getDeclaringTypeName() + "." + signature.getName();
     }
 
     /**

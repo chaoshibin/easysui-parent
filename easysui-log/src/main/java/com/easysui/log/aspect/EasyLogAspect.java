@@ -36,13 +36,14 @@ public class EasyLogAspect {
         String title = easyLogAnnotation.title();
         //请求报文
         String text = StringUtils.left(JsonUtil.toJSON(joinPoint.getArgs()), 2000);
+        String methodName = AspectUtil.getMethodName(joinPoint);
         try {
-            log.info("[{}]请求报文: {}", title, text);
+            log.info("[{}] method={}, 请求报文={}", title, methodName, text);
             Object result = joinPoint.proceed();
-            log.info("[{}]: 请求报文={}, 返回报文={}", title, text, JsonUtil.toJSON(result));
+            log.info("[{}] method={}, 请求报文={}, 响应报文={}", title, methodName, text, JsonUtil.toJSON(result));
             return result;
         } catch (Throwable e) {
-            log.error("[{}异常]: 请求报文={}", title, text, e);
+            log.error("[{}异常] method={}, 请求报文={}", title, methodName, text, e);
             //返回类型
             Class<?> returnType = AspectUtil.getReturnType(joinPoint);
             // 返回码属性域

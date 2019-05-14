@@ -19,11 +19,11 @@ public class KryoSerializerOrNull implements Serializer {
             return kryo;
         }
     };
-    final ThreadLocal<Output> outputLocal = new ThreadLocal<Output>();
-    final ThreadLocal<Input> inputLocal = new ThreadLocal<Input>();
+    final ThreadLocal<Output> outputLocal = new ThreadLocal<>();
+    final ThreadLocal<Input> inputLocal = new ThreadLocal<>();
     private Class<?> ct = null;
 
-    public kryoSerializer(Class<?> ct) {
+    public KryoSerializerOrNull(Class<?> ct) {
         this.ct = ct;
     }
 
@@ -62,7 +62,7 @@ public class KryoSerializerOrNull implements Serializer {
      * @return
      */
     private Output getOutput(byte[] bytes) {
-        Output output = null;
+        Output output;
         if ((output = outputLocal.get()) == null) {
             output = new Output();
             outputLocal.set(output);
@@ -80,7 +80,7 @@ public class KryoSerializerOrNull implements Serializer {
      * @return
      */
     private Output getOutput(byte[] bytes, int offset, int count) {
-        Output output = null;
+        Output output;
         if ((output = outputLocal.get()) == null) {
             output = new Output();
             outputLocal.set(output);
@@ -100,7 +100,7 @@ public class KryoSerializerOrNull implements Serializer {
      * @return
      */
     private Input getInput(byte[] bytes, int offset, int count) {
-        Input input = null;
+        Input input;
         if ((input = inputLocal.get()) == null) {
             input = new Input();
             inputLocal.set(input);

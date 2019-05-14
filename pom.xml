@@ -9,11 +9,11 @@
     <version>1.0.0</version>
     <modules>
         <module>easysui-all</module>
+        <module>easysui-cache</module>
         <module>easysui-common</module>
         <module>easysui-log</module>
         <module>easysui-mybatis</module>
         <module>easysui-validate</module>
-        <module>easysui-web</module>
     </modules>
 
     <properties>
@@ -133,6 +133,16 @@
                 <version>${cglib-nodep.version}</version>
             </dependency>-->
             <!--mybatis end-->
+            <dependency>
+                <groupId>com.esotericsoftware</groupId>
+                <artifactId>kryo</artifactId>
+                <version>4.0.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-expression</artifactId>
+                <version>5.0.9.RELEASE</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <build>

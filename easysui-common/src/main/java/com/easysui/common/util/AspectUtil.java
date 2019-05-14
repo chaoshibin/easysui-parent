@@ -23,6 +23,10 @@ public class AspectUtil {
         return methodSignature.getMethod();
     }
 
+    public static MethodSignature getMethodSignature(JoinPoint jp) {
+        return (MethodSignature) jp.getSignature();
+    }
+
     /**
      * 获取注解方法
      *

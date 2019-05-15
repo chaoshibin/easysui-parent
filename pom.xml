@@ -11,9 +11,11 @@
         <module>easysui-all</module>
         <module>easysui-cache</module>
         <module>easysui-common</module>
+        <module>easysui-core</module>
         <module>easysui-distribute-lock</module>
         <module>easysui-http</module>
         <module>easysui-log</module>
+        <module>easysui-mq</module>
         <module>easysui-mybatis</module>
         <module>easysui-validate</module>
     </modules>

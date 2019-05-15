@@ -6,15 +6,13 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * @author CHAO 2019/5/14 12:34
+ * @author CHAO 2019/5/14 12:41
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface CachePut {
+public @interface EasyCacheExpire {
 
     String cacheName() default "";
 
     String[] key() default {};
-
-    int expire() default 30 * 60;
 }

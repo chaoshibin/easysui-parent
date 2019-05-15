@@ -1,7 +1,7 @@
 package com.easysui.cache.aspect;
 
-import com.easysui.cache.annotation.CacheExpire;
-import com.easysui.cache.annotation.CachePut;
+import com.easysui.cache.annotation.EasyCacheExpire;
+import com.easysui.cache.annotation.EasyCachePut;
 import com.easysui.common.util.AspectUtil;
 import com.easysui.common.util.SpelUtil;
 import lombok.Builder;
@@ -24,18 +24,18 @@ import java.util.stream.Collectors;
 @Aspect
 public class CacheAspect {
 
-    @Pointcut("@annotation(com.easysui.cache.annotation.CachePut)")
+    @Pointcut("@annotation(com.easysui.cache.annotation.EasyCachePut)")
     public void cachePutPointCut() {
     }
 
-    @Pointcut("@annotation(com.easysui.cache.annotation.CacheExpire)")
+    @Pointcut("@annotation(com.easysui.cache.annotation.EasyCacheExpire)")
     public void cacheExpirePointCut() {
     }
 
     @Around("cachePutPointCut()")
     public Object cachePutProcess(ProceedingJoinPoint joinPoint) throws Throwable {
         //注解
-        CachePut annotation = AspectUtil.getMethod(joinPoint).getAnnotation(CachePut.class);
+        EasyCachePut annotation = AspectUtil.getMethod(joinPoint).getAnnotation(EasyCachePut.class);
         //缓存名
         String cacheName = annotation.cacheName();
         //缓存key
@@ -64,7 +64,7 @@ public class CacheAspect {
     @Around("cacheExpirePointCut()")
     public Object cacheExpireProcess(ProceedingJoinPoint joinPoint) throws Throwable {
         //注解
-        CacheExpire annotation = AspectUtil.getMethod(joinPoint).getAnnotation(CacheExpire.class);
+        EasyCacheExpire annotation = AspectUtil.getMethod(joinPoint).getAnnotation(EasyCacheExpire.class);
         //缓存名
         String cacheName = annotation.cacheName();
         //缓存key

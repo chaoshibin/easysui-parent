@@ -3,6 +3,7 @@ package com.easysui.common.util;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -21,6 +22,19 @@ public class AspectUtil {
     public static Method getMethod(JoinPoint jp) {
         MethodSignature methodSignature = (MethodSignature) jp.getSignature();
         return methodSignature.getMethod();
+    }
+
+    /**
+     * 获取方法注解
+     *
+     * @param jp              链接点
+     * @param annotationClass 注解类
+     * @param <T>             注解
+     * @return
+     */
+    public static <T extends Annotation> T getAnnotationOnMethod(JoinPoint jp, Class<T> annotationClass) {
+        MethodSignature methodSignature = (MethodSignature) jp.getSignature();
+        return methodSignature.getMethod().getAnnotation(annotationClass);
     }
 
     public static MethodSignature getMethodSignature(JoinPoint jp) {

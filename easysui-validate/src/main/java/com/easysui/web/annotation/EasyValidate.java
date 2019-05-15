@@ -1,4 +1,4 @@
-package com.easysui.distribute.lock.annotation;
+package com.easysui.web.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -10,29 +10,19 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface EasyLock {
-    /**
-     * 前缀
-     */
-    String prefix();
-
-    /**
-     * 业务键
-     */
-    String[] key() default {};
-
+public @interface EasyValidate {
     /**
      * 错误码域
      */
     String codeField() default "code";
 
     /**
-     * 错误信息域
+     * 错误描述域
      */
     String msgField() default "msg";
 
     /**
-     * 争夺分布式锁失败错误码
+     * 参数校验失败错误码
      */
-    String code() default "777777";
+    String code() default "999998";
 }

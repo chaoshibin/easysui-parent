@@ -1,5 +1,6 @@
 package com.easysui.common.util;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 
@@ -7,6 +8,8 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 /**
  * @author CHAO 2019/4/16
@@ -50,6 +53,27 @@ public class AspectUtil {
     public static String getMethodName(JoinPoint jp) {
         MethodSignature signature = (MethodSignature) jp.getSignature();
         return signature.getDeclaringTypeName() + "." + signature.getName();
+    }
+
+    /**
+     * 连接字符
+     *
+     * @param joinPoint
+     * @param values
+     * @return
+     */
+    public static String contactValue(JoinPoint joinPoint, String[] values) {
+        if (ArrayUtils.isEmpty(values)) {
+            throw new IllegalArgumentException("key值表达式错误");
+        }
+        String cacheKey;
+        if (1 == ArrayUtils.getLength(values)) {
+            cacheKey = SpelUtil.parseValue(values[0], AspectUtil.getMethodSignature(joinPoint).getParameterNames(), joinPoint.getArgs());
+        } else {
+            cacheKey = Arrays.stream(values).map(key -> SpelUtil.parseValue(key, AspectUtil.getMethodSignature(joinPoint).getParameterNames(), joinPoint.getArgs()))
+                    .collect(Collectors.joining("_"));
+        }
+        return cacheKey;
     }
 
     /**

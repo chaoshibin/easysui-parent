@@ -39,26 +39,12 @@ public class CacheAspect {
         //缓存名
         String cacheName = annotation.cacheName();
         //缓存key
-        String cacheKey = this.getCacheKey(joinPoint, annotation.key());
+        String cacheKey = AspectUtil.contactValue(joinPoint, annotation.key());
 
         //TODO redis取缓存
         Object obj = null;
         CacheInfo cacheInfo = CacheInfo.builder().cacheName(cacheName).cacheKey(cacheKey).expireSeconds(annotation.expire()).build();
         return obj != null ? obj : this.doCachePutProceed(joinPoint, cacheInfo);
-    }
-
-    private String getCacheKey(ProceedingJoinPoint joinPoint, String[] keys) {
-        if (ArrayUtils.isEmpty(keys)) {
-            throw new IllegalArgumentException("key值表达式错误");
-        }
-        String cacheKey;
-        if (1 == ArrayUtils.getLength(keys)) {
-            cacheKey = SpelUtil.parseValue(keys[0], AspectUtil.getMethodSignature(joinPoint).getParameterNames(), joinPoint.getArgs());
-        } else {
-            cacheKey = Arrays.stream(keys).map(key -> SpelUtil.parseValue(key, AspectUtil.getMethodSignature(joinPoint).getParameterNames(), joinPoint.getArgs()))
-                    .collect(Collectors.joining("_"));
-        }
-        return cacheKey;
     }
 
     @Around("cacheExpirePointCut()")
@@ -68,7 +54,7 @@ public class CacheAspect {
         //缓存名
         String cacheName = annotation.cacheName();
         //缓存key
-        String cacheKey = this.getCacheKey(joinPoint, annotation.key());
+        String cacheKey = AspectUtil.contactValue(joinPoint, annotation.key());
         //TODO 删除缓存
 
         return joinPoint.proceed();

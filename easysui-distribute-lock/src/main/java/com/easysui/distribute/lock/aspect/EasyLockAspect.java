@@ -4,6 +4,7 @@ import com.easysui.common.enums.ResultEnum;
 import com.easysui.common.util.AspectUtil;
 import com.easysui.distribute.lock.annotation.EasyLock;
 import lombok.extern.slf4j.Slf4j;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -21,19 +22,18 @@ public class EasyLockAspect {
 
     @Pointcut("@annotation(com.easysui.distribute.lock.annotation.EasyLock)")
     public void pointCut() {
-
     }
 
     @Around("pointCut()")
     public Object methodProcess(ProceedingJoinPoint joinPoint) throws Throwable {
         EasyLock annotation = AspectUtil.getAnnotationOnMethod(joinPoint, EasyLock.class);
-        String lockKey = buildLockKey(annotation);
+        String lockKey = buildLockKey(joinPoint, annotation);
         //TODO 加锁
         boolean lock = false;
         //争夺锁失败，构建失败对象
         if (!lock) {
             //返回类型
-            String msg = String.format(LOCK_ERROR_MSG_FORMAT, annotation.key());
+            String msg = String.format(LOCK_ERROR_MSG_FORMAT, lockKey);
             log.info(msg);
             Class<?> returnType = AspectUtil.getReturnType(joinPoint);
             return AspectUtil.buildResult(returnType, annotation.codeField(), annotation.msgField(), annotation.code(), msg);
@@ -43,7 +43,8 @@ public class EasyLockAspect {
         return result;
     }
 
-    private String buildLockKey(EasyLock annotation) {
-        return String.format("%s_%s", annotation.prefix(), annotation.key());
+    private String buildLockKey(JoinPoint joinPoint, EasyLock annotation) {
+        String contactKey = AspectUtil.contactValue(joinPoint, annotation.key());
+        return String.format("%s_%s", annotation.prefix(), contactKey);
     }
 }

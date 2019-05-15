@@ -1,6 +1,8 @@
 package com.easysui.common.util;
 
 import com.google.common.collect.Maps;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.expression.EvaluationContext;
 import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
@@ -14,6 +16,9 @@ import java.util.Map;
 public final class SpelUtil {
 
     public static String parseValue(String expression, String[] parameterNames, Object[] args) {
+        if (ArrayUtils.isEmpty(args)){
+            return expression;
+        }
         Map<String, Object> argMap = Maps.newHashMapWithExpectedSize(args.length);
         for (int i = 0; i < parameterNames.length; i++) {
             argMap.put(parameterNames[i], args[i]);
@@ -28,6 +33,9 @@ public final class SpelUtil {
      * @return 解析参数值
      */
     public static String parseValue(String expression, Map<String, Object> argMap) {
+        if (!StringUtils.startsWith(expression, "#")) {
+            return expression;
+        }
         //使用SPEL进行key的解析
         ExpressionParser parser = new SpelExpressionParser();
         //创建SPEL上下文

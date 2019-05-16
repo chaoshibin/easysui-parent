@@ -13,7 +13,27 @@
     <dependencies>
         <dependency>
             <groupId>com.easysui</groupId>
+            <artifactId>easysui-cache</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.easysui</groupId>
             <artifactId>easysui-common</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.easysui</groupId>
+            <artifactId>easysui-core</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.easysui</groupId>
+            <artifactId>easysui-distribute-lock</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.easysui</groupId>
+            <artifactId>easysui-http</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>
@@ -23,7 +43,17 @@
         </dependency>
         <dependency>
             <groupId>com.easysui</groupId>
+            <artifactId>easysui-mq</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.easysui</groupId>
             <artifactId>easysui-mybatis</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.easysui</groupId>
+            <artifactId>easysui-redis</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>

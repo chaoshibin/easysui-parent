@@ -11,20 +11,20 @@ public interface DistributeLockService {
     /**
      * 获取锁
      *
-     * @param key    锁标识
-     * @param token  用于实现可重入锁
-     * @param expire 过期时间
+     * @param lockKey       锁标识
+     * @param requestId     请求锁唯一ID用于实现可重入锁
+     * @param expireSeconds 过期时间秒
      * @return 结果
      */
-    boolean lock(String key, String token, long expire);
+    boolean lock(String lockKey, String requestId, long expireSeconds);
 
     /**
      * 释放锁
      *
-     * @param key   锁标识
-     * @param token 避免在释放锁时错误释放其它线程的锁
+     * @param lockKey   锁标识
+     * @param requestId 请求锁唯一ID用于实现可重入锁
      */
-    void unLock(String key, String token);
+    boolean unLock(String lockKey, String requestId);
 
     /**
      * 锁类型

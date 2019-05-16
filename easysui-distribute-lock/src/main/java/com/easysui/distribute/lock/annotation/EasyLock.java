@@ -23,8 +23,14 @@ public @interface EasyLock {
      */
     String[] key() default {};
 
+    /**
+     * 锁类型
+     */
     LockEnum type() default LockEnum.REDIS;
 
+    /**
+     * 超时时间
+     */
     long expireSeconds() default 30 * 60;
 
     /**

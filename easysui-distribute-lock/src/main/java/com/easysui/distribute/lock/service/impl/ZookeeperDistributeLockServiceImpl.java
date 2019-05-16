@@ -8,13 +8,13 @@ import com.easysui.distribute.lock.service.DistributeLockService;
  */
 public class ZookeeperDistributeLockServiceImpl implements DistributeLockService {
     @Override
-    public boolean lock(String key, String token, long expire) {
+    public boolean lock(String key, String requestId, long expire) {
         return false;
     }
 
     @Override
-    public void unLock(String key, String token) {
-
+    public boolean unLock(String key, String requestId) {
+        return false;
     }
 
     @Override

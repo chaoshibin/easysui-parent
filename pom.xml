@@ -17,6 +17,7 @@
         <module>easysui-log</module>
         <module>easysui-mq</module>
         <module>easysui-mybatis</module>
+        <module>easysui-redis</module>
         <module>easysui-validate</module>
     </modules>
 
@@ -38,7 +39,7 @@
         <aspectjrt.version>1.9.2</aspectjrt.version>
         <jackson-databind.version>2.9.6</jackson-databind.version>
         <slf4j-api.version>1.7.25</slf4j-api.version>
-        <spring-core.version>5.1.6.RELEASE</spring-core.version>
+        <spring.version>5.1.6.RELEASE</spring.version>
         <hibernate-validator.version>6.0.16.Final</hibernate-validator.version>
     </properties>
     <dependencyManagement>
@@ -112,7 +113,7 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-core</artifactId>
-                <version>${spring-core.version}</version>
+                <version>${spring.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.hibernate.validator</groupId>
@@ -149,8 +150,43 @@
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
                 <artifactId>spring-expression</artifactId>
-                <version>5.0.9.RELEASE</version>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jdbc</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>2.10.2</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot</artifactId>
+                <version>2.1.4.RELEASE</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>4.5.3</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-autoconfigure</artifactId>
+                <version>2.1.4.RELEASE</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

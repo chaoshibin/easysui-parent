@@ -29,10 +29,8 @@ import java.util.Objects;
 public class EasyLockAspect {
     private final static String LOCK_ERROR_MSG_FORMAT = ResultEnum.DISTRIBUTE_LOCK_FAIL.getMsg() + ",lockKey=%s";
     private Map<LockEnum, DistributeLockService> lockServiceMap = Maps.newHashMap();
-    @Resource
-    private DistributeLockService distributeLockService;
 
-    @Resource
+    //@Resource
     public void setLockService(List<DistributeLockService> services) {
         services.forEach(s -> lockServiceMap.put(s.type(), s));
     }
@@ -49,10 +47,11 @@ public class EasyLockAspect {
         DistributeLockService lockService = lockServiceMap.get(annotation.type());
         if (Objects.isNull(lockService)) {
             Class<?> returnType = AspectUtil.getReturnType(joinPoint);
-            return AspectUtil.buildResult(returnType, annotation.codeField(), annotation.msgField(), annotation.code(),
-                    "分布式锁类型无效，type=" + annotation.type().name());
+            return AspectUtil.buildResult(returnType, annotation.codeField(), annotation.msgField(),
+                    ResultEnum.DISTRIBUTE_LOCK_SERVICE_INVALID.getCode(),
+                    "分布式锁服务不可用，type=" + annotation.type().name());
         }
-        if (!this.distributeLockService.lock(lockKey, requestId, annotation.expireSeconds() * 1000)) {
+        if (!lockService.lock(lockKey, requestId, annotation.expireSeconds())) {
             //返回类型
             String msg = String.format(LOCK_ERROR_MSG_FORMAT, lockKey);
             log.info(msg);
@@ -61,7 +60,7 @@ public class EasyLockAspect {
             return AspectUtil.buildResult(returnType, annotation.codeField(), annotation.msgField(), annotation.code(), msg);
         }
         Object result = joinPoint.proceed();
-        this.distributeLockService.unLock(lockKey, requestId);
+        lockService.unLock(lockKey, requestId);
         return result;
     }
 

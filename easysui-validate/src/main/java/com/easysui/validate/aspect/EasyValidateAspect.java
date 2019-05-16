@@ -18,7 +18,7 @@ import java.util.Arrays;
  */
 @Slf4j
 @Aspect
-@Order(2)
+@Order(-2147483646)
 public class EasyValidateAspect {
 
     @Pointcut("@annotation(com.easysui.validate.annotation.EasyValidate)")

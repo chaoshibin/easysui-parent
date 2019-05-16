@@ -1,5 +1,7 @@
 package com.easysui.distribute.lock.service;
 
+import com.easysui.distribute.lock.enums.LockEnum;
+
 /**
  * @author CHAO 2019/5/16 16:05
  */
@@ -23,4 +25,11 @@ public interface DistributeLockService {
      * @param token 避免在释放锁时错误释放其它线程的锁
      */
     void unLock(String key, String token);
+
+    /**
+     * 锁类型
+     *
+     * @return LockEnum
+     */
+    LockEnum type();
 }

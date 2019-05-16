@@ -4,7 +4,9 @@ import com.easysui.common.enums.ResultEnum;
 import com.easysui.common.util.AspectUtil;
 import com.easysui.common.util.CodecUtil;
 import com.easysui.distribute.lock.annotation.EasyLock;
+import com.easysui.distribute.lock.enums.LockEnum;
 import com.easysui.distribute.lock.service.DistributeLockService;
+import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -14,6 +16,9 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.core.annotation.Order;
 
 import javax.annotation.Resource;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 /**
  * @author CHAO 2019/4/16
@@ -23,8 +28,14 @@ import javax.annotation.Resource;
 @Order(-1)
 public class EasyLockAspect {
     private final static String LOCK_ERROR_MSG_FORMAT = ResultEnum.DISTRIBUTE_LOCK_FAIL.getMsg() + ",lockKey=%s";
+    private Map<LockEnum, DistributeLockService> lockServiceMap = Maps.newHashMap();
     @Resource
     private DistributeLockService distributeLockService;
+
+    @Resource
+    public void setLockService(List<DistributeLockService> services) {
+        services.forEach(s -> lockServiceMap.put(s.type(), s));
+    }
 
     @Pointcut("@annotation(com.easysui.distribute.lock.annotation.EasyLock)")
     public void pointCut() {
@@ -35,7 +46,13 @@ public class EasyLockAspect {
         EasyLock annotation = AspectUtil.getAnnotationOnMethod(joinPoint, EasyLock.class);
         String lockKey = buildLockKey(joinPoint, annotation);
         String requestId = CodecUtil.createUUID();
-        if (!distributeLockService.lock(lockKey, requestId, annotation.expireSeconds() * 1000)) {
+        DistributeLockService lockService = lockServiceMap.get(annotation.type());
+        if (Objects.isNull(lockService)) {
+            Class<?> returnType = AspectUtil.getReturnType(joinPoint);
+            return AspectUtil.buildResult(returnType, annotation.codeField(), annotation.msgField(), annotation.code(),
+                    "分布式锁类型无效，type=" + annotation.type().name());
+        }
+        if (!this.distributeLockService.lock(lockKey, requestId, annotation.expireSeconds() * 1000)) {
             //返回类型
             String msg = String.format(LOCK_ERROR_MSG_FORMAT, lockKey);
             log.info(msg);
@@ -44,7 +61,7 @@ public class EasyLockAspect {
             return AspectUtil.buildResult(returnType, annotation.codeField(), annotation.msgField(), annotation.code(), msg);
         }
         Object result = joinPoint.proceed();
-        distributeLockService.unLock(lockKey, requestId);
+        this.distributeLockService.unLock(lockKey, requestId);
         return result;
     }
 

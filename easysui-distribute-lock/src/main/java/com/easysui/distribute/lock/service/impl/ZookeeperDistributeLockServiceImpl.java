@@ -4,9 +4,9 @@ import com.easysui.distribute.lock.enums.LockEnum;
 import com.easysui.distribute.lock.service.DistributeLockService;
 
 /**
- * @author CHAO 2019/5/16 17:20
+ * @author CHAO 2019/5/16 21:35
  */
-public class RedisDistributeLockServiceImpl implements DistributeLockService {
+public class ZookeeperDistributeLockServiceImpl implements DistributeLockService {
     @Override
     public boolean lock(String key, String token, long expire) {
         return false;
@@ -19,6 +19,6 @@ public class RedisDistributeLockServiceImpl implements DistributeLockService {
 
     @Override
     public LockEnum type() {
-        return LockEnum.REDIS;
+        return LockEnum.ZOOKEEPER;
     }
 }

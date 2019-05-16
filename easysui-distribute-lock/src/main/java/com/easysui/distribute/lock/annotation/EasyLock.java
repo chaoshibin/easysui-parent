@@ -1,5 +1,7 @@
 package com.easysui.distribute.lock.annotation;
 
+import com.easysui.distribute.lock.enums.LockEnum;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -21,6 +23,7 @@ public @interface EasyLock {
      */
     String[] key() default {};
 
+    LockEnum type() default LockEnum.REDIS;
 
     long expireSeconds() default 30 * 60;
 

@@ -88,6 +88,7 @@ public final class CodecUtil {
 
     /**
      * 将字符串 SHA1 加密
+     *
      * @param str
      * @return 32位
      */
@@ -98,6 +99,7 @@ public final class CodecUtil {
 
     /**
      * 将字符串 SHA256 加密
+     *
      * @param str
      * @return 64位
      */

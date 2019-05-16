@@ -6,7 +6,6 @@ import com.esotericsoftware.kryo.io.Output;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.OutputStream;
 
 /**
  * @author CHAO 2019/5/14 1:58
@@ -30,7 +29,7 @@ public class KryoSerializer {
     public <T> T deserialize(byte[] bytes) {
         ByteArrayInputStream outputStream = new ByteArrayInputStream(bytes);
         try (Input input = new Input(outputStream)) {
-           return (T) KRYO_THREAD_LOCAL.get().readClassAndObject(input);
+            return (T) KRYO_THREAD_LOCAL.get().readClassAndObject(input);
         }
     }
 }

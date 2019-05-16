@@ -16,7 +16,7 @@ import java.util.Map;
 public final class SpelUtil {
 
     public static String parseValue(String expression, String[] parameterNames, Object[] args) {
-        if (ArrayUtils.isEmpty(args)){
+        if (ArrayUtils.isEmpty(args)) {
             return expression;
         }
         Map<String, Object> argMap = Maps.newHashMapWithExpectedSize(args.length);

@@ -3,7 +3,6 @@ package com.easysui.common.util;
 import org.apache.commons.lang3.time.DateUtils;
 import org.apache.commons.lang3.time.FastDateFormat;
 
-
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
@@ -116,11 +115,11 @@ public final class DateUtil extends DateUtils {
         return date;
     }
 
-    public static Date dateOfBegin(Date date){
+    public static Date dateOfBegin(Date date) {
         return truncate(date, Calendar.DATE);
     }
 
-    public static Date dateOfEnd(Date date){
+    public static Date dateOfEnd(Date date) {
         return ceiling(date, Calendar.DATE);
     }
 }

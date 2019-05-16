@@ -131,11 +131,11 @@
                 <version>${mybatis-spring.version}</version>
             </dependency>
             <!--mybatis延迟加载需要用到-->
-<!--            <dependency>
-                <groupId>cglib</groupId>
-                <artifactId>cglib-nodep</artifactId>
-                <version>${cglib-nodep.version}</version>
-            </dependency>-->
+            <!--            <dependency>
+                            <groupId>cglib</groupId>
+                            <artifactId>cglib-nodep</artifactId>
+                            <version>${cglib-nodep.version}</version>
+                        </dependency>-->
             <!--mybatis end-->
             <dependency>
                 <groupId>com.esotericsoftware</groupId>

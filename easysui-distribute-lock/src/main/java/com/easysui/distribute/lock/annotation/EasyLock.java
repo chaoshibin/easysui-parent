@@ -12,14 +12,17 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface EasyLock {
     /**
-     * 前缀
+     * 锁名称
      */
-    String prefix();
+    String name();
 
     /**
      * 业务键
      */
     String[] key() default {};
+
+
+    long expireSeconds() default 30 * 60;
 
     /**
      * 错误码域

@@ -9,7 +9,7 @@ package com.easysui.common.exception;
  * @version 1.0.0
  * @since 1.0.0
  */
-public final class ArgumentException extends RuntimeException{
+public final class ArgumentException extends RuntimeException {
     private static final long serialVersionUID = 1L;
 
     public ArgumentException(String message) {

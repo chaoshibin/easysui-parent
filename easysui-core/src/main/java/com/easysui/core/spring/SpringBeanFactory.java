@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import java.util.Map;
 
 /**
- * @author chaoshibin
+ * @author CHAO
  */
 @Configuration
 public class SpringBeanFactory implements ApplicationContextAware {

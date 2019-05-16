@@ -66,14 +66,14 @@ public class AspectUtil {
         if (ArrayUtils.isEmpty(values)) {
             throw new IllegalArgumentException("key值表达式错误");
         }
-        String cacheKey;
+        String result;
         if (1 == ArrayUtils.getLength(values)) {
-            cacheKey = SpelUtil.parseValue(values[0], AspectUtil.getMethodSignature(joinPoint).getParameterNames(), joinPoint.getArgs());
+            result = SpelUtil.parseValue(values[0], AspectUtil.getMethodSignature(joinPoint).getParameterNames(), joinPoint.getArgs());
         } else {
-            cacheKey = Arrays.stream(values).map(key -> SpelUtil.parseValue(key, AspectUtil.getMethodSignature(joinPoint).getParameterNames(), joinPoint.getArgs()))
+            result = Arrays.stream(values).map(key -> SpelUtil.parseValue(key, AspectUtil.getMethodSignature(joinPoint).getParameterNames(), joinPoint.getArgs()))
                     .collect(Collectors.joining("_"));
         }
-        return cacheKey;
+        return result;
     }
 
     /**

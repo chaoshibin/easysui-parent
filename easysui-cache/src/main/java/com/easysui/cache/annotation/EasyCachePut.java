@@ -16,5 +16,5 @@ public @interface EasyCachePut {
 
     String[] key() default {};
 
-    int expire() default 30 * 60;
+    int expireSeconds() default 30 * 60;
 }

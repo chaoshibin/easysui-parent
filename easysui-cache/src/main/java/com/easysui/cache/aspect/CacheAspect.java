@@ -3,19 +3,14 @@ package com.easysui.cache.aspect;
 import com.easysui.cache.annotation.EasyCacheExpire;
 import com.easysui.cache.annotation.EasyCachePut;
 import com.easysui.common.util.AspectUtil;
-import com.easysui.common.util.SpelUtil;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.ArrayUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
-
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 /**
  * @author CHAO 2019/4/16
@@ -43,7 +38,7 @@ public class CacheAspect {
 
         //TODO redis取缓存
         Object obj = null;
-        CacheInfo cacheInfo = CacheInfo.builder().cacheName(cacheName).cacheKey(cacheKey).expireSeconds(annotation.expire()).build();
+        CacheInfo cacheInfo = CacheInfo.builder().cacheName(cacheName).cacheKey(cacheKey).expireSeconds(annotation.expireSeconds()).build();
         return obj != null ? obj : this.doCachePutProceed(joinPoint, cacheInfo);
     }
 

@@ -19,6 +19,7 @@
         <module>easysui-mybatis</module>
         <module>easysui-redis</module>
         <module>easysui-validate</module>
+        <module>easysui-zookeeper</module>
     </modules>
 
     <properties>
@@ -34,13 +35,19 @@
         <httpclient.version>4.5.6</httpclient.version>
         <mybatis.version>3.2.8</mybatis.version>
         <mybatis-spring.version>1.2.3</mybatis-spring.version>
-        <lombok.version>1.16.20</lombok.version>
+        <lombok.version>1.18.8</lombok.version>
         <aspectjweaver.version>1.9.2</aspectjweaver.version>
         <aspectjrt.version>1.9.2</aspectjrt.version>
         <jackson-databind.version>2.9.6</jackson-databind.version>
         <slf4j-api.version>1.7.25</slf4j-api.version>
         <spring.version>5.1.6.RELEASE</spring.version>
         <hibernate-validator.version>6.0.16.Final</hibernate-validator.version>
+        <kryo.version>4.0.1</kryo.version>
+        <kryo-serializers.version>0.42</kryo-serializers.version>
+        <jeids.version>2.10.2</jeids.version>
+        <spring-boot.version>2.1.4.RELEASE</spring-boot.version>
+        <curator-recipes.version>4.0.1</curator-recipes.version>
+        <zkclient.version>0.10</zkclient.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -88,18 +95,6 @@
                 <version>${guava.version}</version>
             </dependency>
             <!--google end-->
-            <!--mybatis start-->
-            <dependency>
-                <groupId>org.mybatis</groupId>
-                <artifactId>mybatis</artifactId>
-                <version>${mybatis.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.mybatis</groupId>
-                <artifactId>mybatis-spring</artifactId>
-                <version>${mybatis-spring.version}</version>
-            </dependency>
-
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
@@ -141,12 +136,12 @@
             <dependency>
                 <groupId>com.esotericsoftware</groupId>
                 <artifactId>kryo</artifactId>
-                <version>4.0.1</version>
+                <version>${kryo.version}</version>
             </dependency>
             <dependency>
                 <groupId>de.javakaffee</groupId>
                 <artifactId>kryo-serializers</artifactId>
-                <version>0.42</version>
+                <version>${kryo-serializers.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
@@ -171,22 +166,38 @@
             <dependency>
                 <groupId>redis.clients</groupId>
                 <artifactId>jedis</artifactId>
-                <version>2.10.2</version>
+                <version>${jeids.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot</artifactId>
-                <version>2.1.4.RELEASE</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.httpcomponents</groupId>
-                <artifactId>httpclient</artifactId>
-                <version>4.5.3</version>
+                <version>${spring-boot.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-autoconfigure</artifactId>
-                <version>2.1.4.RELEASE</version>
+                <version>${spring-boot.version}</version>
+            </dependency>
+            <!--zookeeper start-->
+            <dependency>
+                <groupId>com.101tec</groupId>
+                <artifactId>zkclient</artifactId>
+                <version>${zkclient.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.curator</groupId>
+                <artifactId>curator-recipes</artifactId>
+                <version>${curator-recipes.version}</version>
+            </dependency>
+            <!--zookeeper end-->
+            <dependency>
+                <!-- Import dependency management from Spring Boot,not include plugin
+                    management as the parent import style -->
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>

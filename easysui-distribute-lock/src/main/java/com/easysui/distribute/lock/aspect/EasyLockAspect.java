@@ -1,8 +1,8 @@
 package com.easysui.distribute.lock.aspect;
 
-import com.easysui.common.enums.ResultEnum;
-import com.easysui.common.util.AspectUtil;
-import com.easysui.common.util.CodecUtil;
+import com.easysui.core.enums.ResultEnum;
+import com.easysui.core.util.AspectUtil;
+import com.easysui.core.util.CodecUtil;
 import com.easysui.distribute.lock.annotation.EasyLock;
 import com.easysui.distribute.lock.enums.LockEnum;
 import com.easysui.distribute.lock.service.DistributeLockService;

@@ -1,13 +1,17 @@
-package com.easysui.redis;
+package com.easysui.redis.configuration;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * @author CHAO 2019/5/17 0:40
  */
 @Getter
 @Setter
+@ToString
+@ConfigurationProperties("easysui.jedis")
 public class JedisProperties {
     private String host;
     private int port;

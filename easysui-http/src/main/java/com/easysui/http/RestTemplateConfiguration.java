@@ -1,11 +1,13 @@
 package com.easysui.http;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
@@ -21,27 +23,14 @@ import java.util.List;
 /**
  * @author CHAO
  */
-@ConfigurationProperties(prefix = "framework.http")
-public class RestTemplateConfig {
-
-    private int socketTimeout = 10000;
-    private int connectTimeout = 10000;
-    /**
-     * 连接不够用的等待时间，不宜过长，必须设置，比如连接不够用时，等待时间过长将是灾难性的
-     */
-    private int connectionRequestTimeout = 50;
-    /**
-     * 最大并发
-     */
-    private int maxTotal = 2000;
-    /**
-     * 同路由的并发数
-     */
-    private int defaultMaxPerRoute = new Double(maxTotal * 0.6).intValue();
+@Slf4j
+@ConditionalOnProperty("easysui.http.max-total")
+public class RestTemplateConfiguration {
 
     @Bean
     @ConditionalOnMissingBean({RestOperations.class, RestTemplate.class})
     public RestTemplate restTemplate(ClientHttpRequestFactory httpRequestFactory) {
+        log.info("easysui初始化RestTemplate");
         RestTemplate restTemplate = new RestTemplate(httpRequestFactory);
         //StringHttpMessageConverter 默认使用ISO-8859-1编码，此处修改为UTF-8
         List<HttpMessageConverter<?>> messageConverters = restTemplate.getMessageConverters();
@@ -54,7 +43,7 @@ public class RestTemplateConfig {
     }
 
     @Bean
-    @ConditionalOnMissingBean({ClientHttpRequestFactory.class})
+   @ConditionalOnMissingBean({ClientHttpRequestFactory.class})
     public ClientHttpRequestFactory httpRequestFactory(HttpClient httpClient) {
         /*
          * Spring使用；两种方式实现http请求
@@ -66,16 +55,17 @@ public class RestTemplateConfig {
 
     @Bean
     @ConditionalOnMissingBean({HttpClient.class})
-    public HttpClient httpClient() {
+    public HttpClient httpClient(RestTemplateProperties properties) {
+        log.info("easysui初始化HttpClient，配置参数->{}", properties);
         PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager();
-        connectionManager.setMaxTotal(maxTotal);
-        connectionManager.setDefaultMaxPerRoute(defaultMaxPerRoute);
+        connectionManager.setMaxTotal(properties.getMaxTotal());
+        connectionManager.setDefaultMaxPerRoute(properties.getDefaultMaxPerRoute());
         RequestConfig requestConfig = RequestConfig.custom()
                 //读取超时时间
-                .setSocketTimeout(socketTimeout)
+                .setSocketTimeout(properties.getSocketTimeoutMs())
                 //连接超时时间
-                .setConnectTimeout(connectTimeout)
-                .setConnectionRequestTimeout(connectionRequestTimeout)
+                .setConnectTimeout(properties.getConnectTimeoutMs())
+                .setConnectionRequestTimeout(properties.getConnectionRequestTimeoutMs())
                 .build();
         return HttpClientBuilder.create()
                 .setDefaultRequestConfig(requestConfig)
@@ -83,25 +73,5 @@ public class RestTemplateConfig {
                 //设置重试次数，默认三次未开启
                 //.setRetryHandler(new DefaultHttpRequestRetryHandler(2, true))
                 .build();
-    }
-
-    public void setSocketTimeout(int socketTimeout) {
-        this.socketTimeout = socketTimeout;
-    }
-
-    public void setConnectTimeout(int connectTimeout) {
-        this.connectTimeout = connectTimeout;
-    }
-
-    public void setConnectionRequestTimeout(int connectionRequestTimeout) {
-        this.connectionRequestTimeout = connectionRequestTimeout;
-    }
-
-    public void setMaxTotal(int maxTotal) {
-        this.maxTotal = maxTotal;
-    }
-
-    public void setDefaultMaxPerRoute(int defaultMaxPerRoute) {
-        this.defaultMaxPerRoute = defaultMaxPerRoute;
     }
 }

@@ -1,4 +1,4 @@
-package com.easysui.common.enums;
+package com.easysui.core.enums;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

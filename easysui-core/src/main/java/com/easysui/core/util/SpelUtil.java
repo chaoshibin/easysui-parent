@@ -1,4 +1,4 @@
-package com.easysui.common.util;
+package com.easysui.core.util;
 
 import com.google.common.collect.Maps;
 import org.apache.commons.lang3.ArrayUtils;

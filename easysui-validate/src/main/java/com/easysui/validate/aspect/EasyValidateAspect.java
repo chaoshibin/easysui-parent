@@ -1,7 +1,7 @@
 package com.easysui.validate.aspect;
 
-import com.easysui.common.util.AspectUtil;
-import com.easysui.common.util.Result;
+import com.easysui.core.util.AspectUtil;
+import com.easysui.core.util.Result;
 import com.easysui.validate.annotation.EasyValidate;
 import com.easysui.validate.util.ValidateUtil;
 import lombok.extern.slf4j.Slf4j;

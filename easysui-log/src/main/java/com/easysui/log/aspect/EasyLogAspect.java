@@ -1,8 +1,8 @@
 package com.easysui.log.aspect;
 
-import com.easysui.common.enums.ResultEnum;
-import com.easysui.common.util.AspectUtil;
-import com.easysui.common.util.JsonUtil;
+import com.easysui.core.enums.ResultEnum;
+import com.easysui.core.util.AspectUtil;
+import com.easysui.core.util.JsonUtil;
 import com.easysui.log.annotation.EasyLog;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

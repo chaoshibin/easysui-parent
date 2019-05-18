@@ -2,7 +2,7 @@ package com.easysui.cache.aspect;
 
 import com.easysui.cache.annotation.EasyCacheExpire;
 import com.easysui.cache.annotation.EasyCachePut;
-import com.easysui.common.util.AspectUtil;
+import com.easysui.core.util.AspectUtil;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

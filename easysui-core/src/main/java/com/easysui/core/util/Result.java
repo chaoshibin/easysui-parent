@@ -1,6 +1,6 @@
-package com.easysui.common.util;
+package com.easysui.core.util;
 
-import com.easysui.common.enums.ResultEnum;
+import com.easysui.core.enums.ResultEnum;
 import lombok.*;
 
 import java.io.Serializable;
@@ -29,32 +29,28 @@ public class Result<T> implements Serializable {
      */
     private T value;
 
-    public static <T> Result ok(T value) {
+    public static <T> Result<T> ok(T value) {
         return Result.create(ResultEnum.OK.getCode(), ResultEnum.OK.getMsg(), value);
     }
 
-    public static <T> Result ok(String msg, T value) {
+    public static <T> Result<T> ok(String msg, T value) {
         return Result.create(ResultEnum.OK.getCode(), msg, value);
     }
 
-    public static Result error(String msg) {
+    public static <T> Result<T> error(String msg) {
         return Result.create(ResultEnum.ERROR.getCode(), msg, null);
     }
 
-    public static <T> Result error(String msg, T value) {
+    public static <T> Result<T> error(String msg, T value) {
         return Result.create(ResultEnum.ERROR.getCode(), msg, value);
     }
 
-    public static Result retry(String msg) {
+    public static <T> Result<T> retry(String msg) {
         return Result.create(ResultEnum.RETRY.getCode(), msg, null);
     }
 
-    public static <T> Result retry(String msg, T value) {
+    public static <T> Result<T> retry(String msg, T value) {
         return Result.create(ResultEnum.RETRY.getCode(), msg, value);
-    }
-
-    public static <T> Result<T> create(String code, String msg) {
-        return new Result<>(code, msg, null);
     }
 
     public static <T> Result<T> create(String code, String msg, T value) {

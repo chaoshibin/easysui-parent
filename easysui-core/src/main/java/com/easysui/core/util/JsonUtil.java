@@ -1,4 +1,4 @@
-package com.easysui.common.util;
+package com.easysui.core.util;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;

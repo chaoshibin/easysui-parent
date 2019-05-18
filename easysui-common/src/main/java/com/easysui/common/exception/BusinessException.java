@@ -1,7 +1,7 @@
 package com.easysui.common.exception;
 
 
-import com.easysui.common.enums.ResultEnum;
+import com.easysui.core.enums.ResultEnum;
 
 /**
  * 功能描述: 业务异常

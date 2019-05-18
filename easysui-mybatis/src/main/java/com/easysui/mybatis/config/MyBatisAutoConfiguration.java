@@ -81,7 +81,7 @@ public class MyBatisAutoConfiguration {
         @Bean
         public MapperScannerConfigurer mapperScannerConfigurer() {
             MapperScannerConfigurer config = new MapperScannerConfigurer();
-            config.setBasePackage(environment.getProperty("mybatis.base-package"));
+            config.setBasePackage(environment.getProperty("easysui.mybatis.base-package"));
             config.setSqlSessionFactoryBeanName(SQL_SESSION_FACTORY);
             return config;
         }

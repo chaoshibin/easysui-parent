@@ -18,15 +18,12 @@ public final class JedisManager {
             synchronized (JedisManager.class) {
                 if (Objects.isNull(pool)) {
                     JedisProperties properties = SpringBeanFactory.get(JedisProperties.class);
-                    if (Objects.isNull(properties)) {
-                        throw new RuntimeException("读取redis连接信息失败");
-                    }
                     JedisPoolConfig config = new JedisPoolConfig();
                     config.setMaxTotal(properties.getMaxTotal());
                     config.setMaxIdle(properties.getMaxIdle());
                     config.setMinIdle(properties.getMinIdle());
                     config.setMaxWaitMillis(properties.getMaxWaitMillis());
-                    pool = new JedisPool(config,properties.getIp(),properties.getPort(),3000,properties.getPassword());
+                    pool = new JedisPool(config, properties.getHost(), properties.getPort(), 3000, properties.getPassword());
                 }
             }
         }

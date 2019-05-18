@@ -15,8 +15,6 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.core.annotation.Order;
 
-import javax.annotation.Resource;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -31,8 +29,8 @@ public class EasyLockAspect {
     private Map<LockEnum, DistributeLockService> lockServiceMap = Maps.newHashMap();
 
     //@Resource
-    public void setLockService(List<DistributeLockService> services) {
-        services.forEach(s -> lockServiceMap.put(s.type(), s));
+    public void setLockService(DistributeLockService service) {
+        lockServiceMap.put(service.type(), service);
     }
 
     @Pointcut("@annotation(com.easysui.distribute.lock.annotation.EasyLock)")

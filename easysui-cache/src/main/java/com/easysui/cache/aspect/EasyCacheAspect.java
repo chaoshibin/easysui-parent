@@ -17,7 +17,7 @@ import org.aspectj.lang.annotation.Pointcut;
  */
 @Slf4j
 @Aspect
-public class CacheAspect {
+public class EasyCacheAspect {
 
     @Pointcut("@annotation(com.easysui.cache.annotation.EasyCachePut)")
     public void cachePutPointCut() {

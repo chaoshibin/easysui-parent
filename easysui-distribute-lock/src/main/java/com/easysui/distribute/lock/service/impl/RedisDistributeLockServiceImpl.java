@@ -18,12 +18,12 @@ public class RedisDistributeLockServiceImpl implements DistributeLockService {
     private static final Long RELEASE_SUCCESS = 1L;
 
     @Override
-    public boolean lock(String lockKey, String requestId, long expire) {
+    public boolean lock(String lockKey, String requestId, long expireSeconds) {
         Jedis jedis = JedisManager.getJedis();
         // Jedis 3.0没有此方法
         String result;
         try {
-            result = jedis.set(lockKey, requestId, SET_IF_NOT_EXIST, SET_WITH_EXPIRE_TIME, expire);
+            result = jedis.set(lockKey, requestId, SET_IF_NOT_EXIST, SET_WITH_EXPIRE_TIME, expireSeconds);
         } finally {
             JedisManager.close(jedis);
         }

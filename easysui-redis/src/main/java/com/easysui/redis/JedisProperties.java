@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class JedisProperties {
-    private String ip;
+    private String host;
     private int port;
     private String password;
     //最大连接数

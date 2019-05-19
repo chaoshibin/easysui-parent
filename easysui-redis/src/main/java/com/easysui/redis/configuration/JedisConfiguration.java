@@ -1,6 +1,6 @@
 package com.easysui.redis.configuration;
 
-import com.easysui.redis.redis.RedisUtil;
+import com.easysui.redis.redis.JedisUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -34,7 +34,7 @@ public class JedisConfiguration {
     }
 
     @Bean
-    public RedisUtil redisUtil(){
-        return new RedisUtil();
+    public JedisUtil redisUtil() {
+        return new JedisUtil();
     }
 }

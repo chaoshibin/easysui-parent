@@ -18,7 +18,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @Getter
 @Setter
 @ToString
-@ConfigurationProperties(prefix = "easysui.mybatis")
 public class MyBatisProperties {
     private String typeAliasesPackage;
     private String mapperLocations;

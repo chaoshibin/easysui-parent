@@ -11,7 +11,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @Setter
 @Getter
 @ToString
-@ConfigurationProperties("easysui.http")
 public class RestTemplateProperties {
     private int socketTimeoutMs = 10000;
     private int connectTimeoutMs = 10000;

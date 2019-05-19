@@ -30,10 +30,10 @@
             <artifactId>spring-boot-autoconfigure</artifactId>
         </dependency>
         <!--zookeeper start-->
-        <dependency>
+<!--        <dependency>
             <groupId>com.101tec</groupId>
             <artifactId>zkclient</artifactId>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>org.apache.curator</groupId>
             <artifactId>curator-recipes</artifactId>

@@ -11,7 +11,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @Getter
 @Setter
 @ToString
-@ConfigurationProperties("easysui.zookeeper")
 public class ZookeeperProperties {
     private String connectionString = "localhost:2181";
     private int sessionTimeoutMs = 60000;

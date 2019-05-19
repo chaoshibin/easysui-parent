@@ -5,6 +5,7 @@ import org.apache.curator.RetryPolicy;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.retry.RetryNTimes;
+import org.apache.zookeeper.ZooKeeper;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -16,11 +17,10 @@ import org.springframework.context.annotation.Bean;
  */
 @Slf4j
 @ConditionalOnProperty("easysui.zookeeper.connection-string")
-@EnableConfigurationProperties(ZookeeperProperties.class)
 public class ZookeeperConfiguration {
     @Bean
     @ConditionalOnMissingBean
-    @ConditionalOnClass(CuratorFramework.class)
+    @ConditionalOnClass({CuratorFramework.class, ZooKeeper.class})
     public CuratorFramework curatorFramework(ZookeeperProperties zkProperties) {
         log.info("easysui使用Curator连接zookeeper,配置参数->{}", zkProperties);
         RetryPolicy retryPolicy = new RetryNTimes(Integer.MAX_VALUE, 5000);

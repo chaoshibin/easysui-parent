@@ -11,7 +11,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @Getter
 @Setter
 @ToString
-@ConfigurationProperties("easysui.jedis")
 public class JedisProperties {
     private String host;
     private int port;

@@ -2,7 +2,9 @@ package com.easysui.cache.aspect;
 
 import com.easysui.cache.annotation.EasyCacheExpire;
 import com.easysui.cache.annotation.EasyCachePut;
+import com.easysui.core.constant.StrConst;
 import com.easysui.core.util.AspectUtil;
+import com.easysui.core.util.StringFormatUtils;
 import com.easysui.redis.service.RedisService;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,7 +28,6 @@ import java.util.Objects;
 public class EasyCacheAspect {
     @Autowired
     private RedisService redisService;
-    private final static String NULL = "NULL";
 
     @Pointcut("@annotation(com.easysui.cache.annotation.EasyCachePut)")
     public void cachePutPointCut() {
@@ -66,15 +67,15 @@ public class EasyCacheAspect {
     }
 
     private Object putIfNull(Object value) {
-        return Objects.isNull(value) ? NULL : value;
+        return Objects.isNull(value) ? StrConst.NULL : value;
     }
 
     private Object getIfNull(Object value) {
-        return Objects.equals(NULL, value) ? null : value;
+        return Objects.equals(StrConst.NULL, value) ? null : value;
     }
 
     private String buildKey(String cacheName, String cacheKey) {
-        return String.format("%s_%s", cacheName, cacheKey);
+        return StringFormatUtils.format(cacheName, cacheKey);
     }
 
     private CacheInfo buildCachePutInfo(ProceedingJoinPoint pjp) {
@@ -86,7 +87,7 @@ public class EasyCacheAspect {
         }
         //缓存key
         String contactKey = AspectUtil.contactValue(pjp, annotation.key());
-        String key = buildKey(annotation.cacheName(), contactKey);
+        String key = this.buildKey(annotation.cacheName(), contactKey);
         return CacheInfo.builder().key(key).expireSeconds(expireSeconds).build();
     }
 

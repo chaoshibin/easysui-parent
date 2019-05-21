@@ -3,6 +3,7 @@ package com.easysui.distribute.lock.aspect;
 import com.easysui.core.enums.ResultEnum;
 import com.easysui.core.util.AspectUtil;
 import com.easysui.core.util.CodecUtil;
+import com.easysui.core.util.StringFormatUtils;
 import com.easysui.distribute.lock.annotation.EasyLock;
 import com.easysui.distribute.lock.enums.LockEnum;
 import com.easysui.distribute.lock.service.DistributeLockService;
@@ -15,6 +16,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.core.annotation.Order;
 
+import javax.annotation.Resource;
 import java.util.Map;
 import java.util.Objects;
 
@@ -28,7 +30,7 @@ public class EasyLockAspect {
     private final static String LOCK_ERROR_MSG_FORMAT = ResultEnum.DISTRIBUTE_LOCK_FAIL.getMsg() + ",lockKey=%s";
     private Map<LockEnum, DistributeLockService> lockServiceMap = Maps.newHashMap();
 
-    //@Resource
+    @Resource
     public void setLockService(DistributeLockService service) {
         lockServiceMap.put(service.type(), service);
     }
@@ -64,6 +66,6 @@ public class EasyLockAspect {
 
     private String buildLockKey(JoinPoint joinPoint, EasyLock annotation) {
         String contactKey = AspectUtil.contactValue(joinPoint, annotation.key());
-        return String.format("%s_%s", annotation.name(), contactKey);
+        return StringFormatUtils.format(annotation.name(), contactKey);
     }
 }

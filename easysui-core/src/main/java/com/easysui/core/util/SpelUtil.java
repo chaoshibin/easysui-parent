@@ -1,5 +1,6 @@
 package com.easysui.core.util;
 
+import com.easysui.core.constant.StrConst;
 import com.google.common.collect.Maps;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -33,7 +34,7 @@ public final class SpelUtil {
      * @return 解析参数值
      */
     public static String parseValue(String expression, Map<String, Object> argMap) {
-        if (!StringUtils.startsWith(expression, "#")) {
+        if (!StringUtils.startsWith(expression, StrConst.WELL)) {
             return expression;
         }
         //使用SPEL进行key的解析

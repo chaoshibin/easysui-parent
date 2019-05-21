@@ -37,7 +37,7 @@ public final class RedisUtil {
     }
 
 
-    public static Boolean unLockJedis(String lockKey, String requestId) {
+    public static Boolean unlockJedis(String lockKey, String requestId) {
         return redisTemplate.execute((RedisCallback<Boolean>) redisConnection -> {
             Jedis jedis = (Jedis) redisConnection.getNativeConnection();
             Object result = jedis.eval(RELEASE_SCRIPT, Collections.singletonList(lockKey), Collections.singletonList(requestId));

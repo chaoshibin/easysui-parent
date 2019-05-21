@@ -24,7 +24,7 @@ public class SpringRedisServiceImpl implements RedisService {
 
     @Override
     @SuppressWarnings("unchecked")
-    public <T> T get(String key, T clazz) {
+    public <T> T get(String key, Class<T> clazz) {
         return (T) valueOperations.get(key);
     }
 

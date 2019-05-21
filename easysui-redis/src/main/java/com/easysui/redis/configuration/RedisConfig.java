@@ -10,7 +10,7 @@ import org.springframework.data.redis.core.*;
 import java.io.Serializable;
 
 /**
- * @author chaoshibin
+ * @author CHAO
  */
 @Configuration
 @EnableCaching

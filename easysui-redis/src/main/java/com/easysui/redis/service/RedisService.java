@@ -9,7 +9,7 @@ public interface RedisService {
 
     <T extends Serializable> void set(String key, T value, long expireSeconds);
 
-    <T> T get(String key, T clazz);
+    <T> T get(String key, Class<T> clazz);
 
     void del(String key);
 }

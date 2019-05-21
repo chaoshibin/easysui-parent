@@ -8,7 +8,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.RandomUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -26,6 +26,7 @@ import java.util.Objects;
 public class EasyCacheAspect {
     @Autowired
     private RedisService redisService;
+    private final static String NULL = "NULL";
 
     @Pointcut("@annotation(com.easysui.cache.annotation.EasyCachePut)")
     public void cachePutPointCut() {
@@ -37,15 +38,12 @@ public class EasyCacheAspect {
 
     @Around("cachePutPointCut()")
     public Object cachePutProcess(ProceedingJoinPoint joinPoint) throws Throwable {
-        //注解
-        EasyCachePut annotation = AspectUtil.getMethod(joinPoint).getAnnotation(EasyCachePut.class);
-        //缓存key
-        String contactKey = AspectUtil.contactValue(joinPoint, annotation.key());
-        Class<?> cacheValue = redisService.get(contactKey, AspectUtil.getReturnType(joinPoint));
+        CacheInfo cacheInfo = buildCachePutInfo(joinPoint);
+        Object cacheValue = redisService.get(cacheInfo.getKey(), AspectUtil.getReturnType(joinPoint));
         if (Objects.nonNull(cacheValue)) {
-            return cacheValue;
+            //1.1和1.2处协同解决缓存击穿     1.1
+            return this.getIfNull(cacheValue);
         }
-        CacheInfo cacheInfo = buildCacheInfo(annotation, contactKey);
         return this.doCachePutProceed(joinPoint, cacheInfo);
     }
 
@@ -59,28 +57,44 @@ public class EasyCacheAspect {
         return joinPoint.proceed();
     }
 
-    private Object doCachePutProceed(ProceedingJoinPoint joinPoint, CacheInfo cacheInfo) throws Throwable {
+    private Object doCachePutProceed(ProceedingJoinPoint joinPoint, CacheInfo cacheputInfo) throws Throwable {
         Object result = joinPoint.proceed();
-        Serializable cacheValue = result instanceof String ? StringUtils.defaultString(String.valueOf(result)) : (Serializable) result;
-        String key = this.buildKey(cacheInfo.getCacheName(), cacheInfo.getCacheKey());
-        redisService.set(key, cacheValue, cacheInfo.expireSeconds);
+        // 1.1和1.2处协同解决缓存击穿      1.2
+        Serializable value = (Serializable) this.putIfNull(result);
+        redisService.set(cacheputInfo.getKey(), value, cacheputInfo.getExpireSeconds());
         return result;
+    }
+
+    private Object putIfNull(Object value) {
+        return Objects.isNull(value) ? NULL : value;
+    }
+
+    private Object getIfNull(Object value) {
+        return Objects.equals(NULL, value) ? null : value;
     }
 
     private String buildKey(String cacheName, String cacheKey) {
         return String.format("%s_%s", cacheName, cacheKey);
     }
 
-    private CacheInfo buildCacheInfo(EasyCachePut annotation, String cacheKey) {
-        return CacheInfo.builder().cacheName(annotation.cacheName()).cacheKey(cacheKey).expireSeconds(annotation.expireSeconds()).build();
+    private CacheInfo buildCachePutInfo(ProceedingJoinPoint pjp) {
+        EasyCachePut annotation = AspectUtil.getMethod(pjp).getAnnotation(EasyCachePut.class);
+        long expireSeconds = annotation.expireSeconds();
+        if (expireSeconds == 0L) {
+            //随机数防止缓存雪崩 30-60分钟
+            expireSeconds = RandomUtils.nextLong(1800, 3600);
+        }
+        //缓存key
+        String contactKey = AspectUtil.contactValue(pjp, annotation.key());
+        String key = buildKey(annotation.cacheName(), contactKey);
+        return CacheInfo.builder().key(key).expireSeconds(expireSeconds).build();
     }
 
     @Setter
     @Getter
     @Builder
     private static class CacheInfo {
-        private String cacheName;
-        private String cacheKey;
+        private String key;
         private long expireSeconds;
     }
 }

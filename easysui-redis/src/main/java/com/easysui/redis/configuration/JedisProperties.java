@@ -3,7 +3,6 @@ package com.easysui.redis.configuration;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * @author CHAO 2019/5/17 0:40
@@ -11,6 +10,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @Getter
 @Setter
 @ToString
+@Deprecated
 public class JedisProperties {
     private String host;
     private int port;

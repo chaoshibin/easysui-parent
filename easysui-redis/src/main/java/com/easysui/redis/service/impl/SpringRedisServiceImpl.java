@@ -1,11 +1,13 @@
 package com.easysui.redis.service.impl;
 
+import com.easysui.core.configuration.AppConfiguration;
+import com.easysui.core.util.StringFormatUtils;
 import com.easysui.redis.service.RedisService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 
 import javax.annotation.Resource;
-import java.io.Serializable;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -13,23 +15,33 @@ import java.util.concurrent.TimeUnit;
  */
 public class SpringRedisServiceImpl implements RedisService {
     @Resource(name = "redisTemplate")
-    private ValueOperations<String, Serializable> valueOperations;
+    private ValueOperations<String, Object> valueOperations;
     @Resource(name = "redisTemplate")
-    private RedisTemplate<String, Serializable> redisTemplate;
+    private RedisTemplate<String, Object> redisTemplate;
+    @Resource
+    private AppConfiguration appConfiguration;
 
     @Override
-    public <T extends Serializable> void set(String key, T value, long expireSeconds) {
-        valueOperations.set(key, value, expireSeconds, TimeUnit.SECONDS);
+    public <T> void set(String key, T value, long expireSeconds) {
+        valueOperations.set(this.buildKey(key), value, expireSeconds, TimeUnit.SECONDS);
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public <T> T get(String key, Class<T> clazz) {
-        return (T) valueOperations.get(key);
+        return (T) valueOperations.get(this.buildKey(key));
     }
 
     @Override
     public void del(String key) {
-        redisTemplate.delete(key);
+        redisTemplate.delete(this.buildKey(key));
+    }
+
+    @Override
+    public String buildKey(String key) {
+        if (StringUtils.isBlank(appConfiguration.getAppName())) {
+            throw new RuntimeException("未读取到app-name属性");
+        }
+        return StringFormatUtils.format(appConfiguration.getAppName(), key);
     }
 }

@@ -1,6 +1,6 @@
 package com.easysui.core.util;
 
-import com.easysui.core.enums.SymbolEnum;
+import com.easysui.core.constant.StrConst;
 import com.google.common.base.Joiner;
 
 /**
@@ -10,18 +10,18 @@ public class StringFormatUtils {
     /**
      * 下划线分割
      */
-    private static final Joiner JOINER_UNDERLINE = Joiner.on(SymbolEnum.UNDERLINE.getSymbol()).useForNull("");
+    private static final Joiner JOINER_UNDERLINE = Joiner.on(StrConst.UNDERLINE).useForNull("");
     /**
      * 斜杠分割
      */
-    private static final Joiner JOINER_SLASH = Joiner.on(SymbolEnum.SLASH.getSymbol()).useForNull("");
+    private static final Joiner JOINER_SLASH = Joiner.on(StrConst.SLASH).useForNull("");
     private static final String S_S = "%s_%s";
 
-    public static String format(SymbolEnum symbolEnum, String... args) {
-        return Joiner.on(symbolEnum.getSymbol()).useForNull(SymbolEnum.EMPTY.getSymbol()).join(args);
+    public static String format(String symbol, String... args) {
+        return Joiner.on(symbol).useForNull(StrConst.EMPTY).join(args);
     }
 
-    public static String formatLine(String... args) {
+    public static String formatUnderline(String... args) {
         return JOINER_UNDERLINE.join(args);
     }
 

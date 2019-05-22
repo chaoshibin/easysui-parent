@@ -1,37 +1,42 @@
 package com.easysui.redis.configuration;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.EnableCaching;
+import com.easysui.redis.service.RedisService;
+import com.easysui.redis.service.impl.SpringRedisServiceImpl;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.*;
-
-import java.io.Serializable;
+import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
  * @author CHAO
  */
 @Configuration
-@EnableCaching
+@ConditionalOnClass({RedisOperations.class})
 public class RedisConfig {
-    @Autowired
-    private RedisConnectionFactory factory;
 
     @Bean(name = "redisTemplate")
-    public RedisTemplate<String, Serializable> redisTemplate() {
-        RedisTemplate<String, Serializable> redisTemplate = new RedisTemplate<>();
+    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory) {
+        RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(factory);
+        StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
+        //默认是JdkSerializationRedisSerializer
+        redisTemplate.setKeySerializer(stringRedisSerializer);
+        JdkSerializationRedisSerializer jdkSerializationRedisSerializer = new JdkSerializationRedisSerializer();
+        //默认是JdkSerializationRedisSerializer
+        redisTemplate.setValueSerializer(jdkSerializationRedisSerializer);
         return redisTemplate;
     }
 
     @Bean(name = "redisTemplate")
-    public ValueOperations<String, Serializable> valueOperations(RedisTemplate<String, Serializable> redisTemplate) {
+    public ValueOperations<String, Object> valueOperations(RedisTemplate<String, Object> redisTemplate) {
         return redisTemplate.opsForValue();
     }
 
     @Bean(name = "stringRedisTemplate")
-    public StringRedisTemplate stringRedisTemplate() {
+    public StringRedisTemplate stringRedisTemplate(RedisConnectionFactory factory) {
         StringRedisTemplate redisTemplate = new StringRedisTemplate();
         redisTemplate.setConnectionFactory(factory);
         return redisTemplate;
@@ -60,5 +65,10 @@ public class RedisConfig {
     @Bean(name = "stringRedisTemplate")
     public ZSetOperations<String, String> zSetOperations(StringRedisTemplate redisTemplate) {
         return redisTemplate.opsForZSet();
+    }
+
+    @Bean(name = "redisService")
+    public RedisService redisService() {
+        return new SpringRedisServiceImpl();
     }
 }

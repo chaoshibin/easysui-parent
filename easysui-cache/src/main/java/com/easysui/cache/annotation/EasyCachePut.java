@@ -28,12 +28,12 @@ public @interface EasyCachePut {
     long expireSeconds() default 0L;
 
     /**
-     * 不受缓存干预策略影响但会过期
+     * 不受缓存干预策略影响但会过期(暂未实现)
      */
-    boolean alwaysCache() default false;
+    //boolean alwaysCache() default false;
 
     /**
-     * 私有缓存
+     * 私有缓存（暂未实现）
      */
-    boolean privateCache() default false;
+    //boolean privateCache() default true;
 }

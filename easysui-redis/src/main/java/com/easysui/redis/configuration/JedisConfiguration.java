@@ -15,7 +15,7 @@ import redis.clients.jedis.JedisPoolConfig;
  */
 
 @Slf4j
-@ConditionalOnProperty("easysui.jedis.host")
+@ConditionalOnProperty(prefix = "easysui.jedis", name = "enabled", havingValue = "true")
 @EnableConfigurationProperties(JedisProperties.class)
 @Deprecated
 public class JedisConfiguration {

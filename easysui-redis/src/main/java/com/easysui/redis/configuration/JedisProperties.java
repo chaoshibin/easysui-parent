@@ -12,6 +12,7 @@ import lombok.ToString;
 @ToString
 @Deprecated
 public class JedisProperties {
+    private String enabled;
     private String host;
     private int port;
     private String password;

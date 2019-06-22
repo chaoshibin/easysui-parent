@@ -12,6 +12,7 @@
         <module>easysui-common</module>
         <module>easysui-core</module>
         <module>easysui-distribute-lock</module>
+        <module>easysui-dubbo</module>
         <module>easysui-http</module>
         <module>easysui-log</module>
         <module>easysui-mq</module>

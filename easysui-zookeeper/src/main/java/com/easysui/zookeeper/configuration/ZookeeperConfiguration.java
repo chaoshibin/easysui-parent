@@ -9,14 +9,13 @@ import org.apache.zookeeper.ZooKeeper;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 
 /**
  * @author CHAO 2019/5/18 23:18
  */
 @Slf4j
-@ConditionalOnProperty("easysui.zookeeper.connection-string")
+@ConditionalOnProperty(prefix = "easysui.zookeeper", name = "enabled", havingValue = "true")
 public class ZookeeperConfiguration {
     @Bean
     @ConditionalOnMissingBean

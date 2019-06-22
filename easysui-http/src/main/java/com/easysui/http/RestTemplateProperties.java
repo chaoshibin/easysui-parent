@@ -3,7 +3,6 @@ package com.easysui.http;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * @author CHAO 2019/5/19 1:40
@@ -12,6 +11,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @Getter
 @ToString
 public class RestTemplateProperties {
+    private String enabled;
     private int socketTimeoutMs = 10000;
     private int connectTimeoutMs = 10000;
     /**

@@ -20,8 +20,21 @@ import java.util.Objects;
 public class DubboLogFilter implements Filter {
     @Override
     public Result invoke(final Invoker<?> invoker, final Invocation invocation) throws RpcException {
-        RpcContext.getContext().setAttachment(ConstantPool.REQUEST_ID, MDC.get(ConstantPool.REQUEST_ID));
-        RpcContext.getContext().setAttachment(ConstantPool.SERVER_IP, MDC.get(ConstantPool.SERVER_IP));
+        //用于日志打印
+        if (StringUtils.isNotEmpty(MDC.get(ConstantPool.REQUEST_ID))) {
+            RpcContext.getContext().setAttachment(ConstantPool.REQUEST_ID, MDC.get(ConstantPool.REQUEST_ID));
+        }
+        if (StringUtils.isNotEmpty(MDC.get(ConstantPool.SERVER_IP))) {
+            RpcContext.getContext().setAttachment(ConstantPool.REQUEST_ID, MDC.get(ConstantPool.SERVER_IP));
+        }
+        if (StringUtils.isEmpty(MDC.get(ConstantPool.REQUEST_ID)) &&
+                StringUtils.isNotEmpty(RpcContext.getContext().getAttachment(ConstantPool.REQUEST_ID))) {
+            MDC.put(ConstantPool.REQUEST_ID, RpcContext.getContext().getAttachment(ConstantPool.REQUEST_ID));
+        }
+        if (StringUtils.isEmpty(MDC.get(ConstantPool.SERVER_IP)) &&
+                StringUtils.isNotEmpty(RpcContext.getContext().getAttachment(ConstantPool.SERVER_IP))) {
+            MDC.put(ConstantPool.SERVER_IP, RpcContext.getContext().getAttachment(ConstantPool.SERVER_IP));
+        }
         String methodName = invocation.getMethodName();
         Class clazz = invoker.getInterface();
         Class[] args = invocation.getParameterTypes();

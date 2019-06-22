@@ -62,7 +62,7 @@ public class Result<T> implements Serializable {
     }
 
     public boolean isError() {
-        return Objects.equals(ResultEnum.ERROR.getCode(), this.code);
+        return !isOk();
     }
 
     public boolean isRetry() {

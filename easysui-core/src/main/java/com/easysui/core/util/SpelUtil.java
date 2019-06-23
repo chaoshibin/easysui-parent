@@ -24,7 +24,7 @@ public final class SpelUtil {
         for (int i = 0; i < parameterNames.length; i++) {
             argMap.put(parameterNames[i], args[i]);
         }
-        return parseValue(expression, argMap);
+        return StringUtils.defaultIfBlank(parseValue(expression, argMap), StringUtils.EMPTY);
     }
 
 

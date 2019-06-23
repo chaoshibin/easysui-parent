@@ -66,6 +66,11 @@
             <artifactId>easysui-zookeeper</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.easysui</groupId>
+            <artifactId>easysui-dubbo</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

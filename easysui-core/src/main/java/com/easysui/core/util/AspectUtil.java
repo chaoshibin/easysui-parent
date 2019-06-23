@@ -1,5 +1,6 @@
 package com.easysui.core.util;
 
+import com.easysui.core.constant.StrConst;
 import org.apache.commons.lang3.ArrayUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -71,7 +72,7 @@ public class AspectUtil {
             result = SpelUtil.parseValue(values[0], AspectUtil.getMethodSignature(joinPoint).getParameterNames(), joinPoint.getArgs());
         } else {
             result = Arrays.stream(values).map(key -> SpelUtil.parseValue(key, AspectUtil.getMethodSignature(joinPoint).getParameterNames(), joinPoint.getArgs()))
-                    .collect(Collectors.joining("_"));
+                    .collect(Collectors.joining(StrConst.UNDERLINE));
         }
         return result;
     }

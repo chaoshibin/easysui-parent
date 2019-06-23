@@ -12,6 +12,7 @@
         <module>easysui-common</module>
         <module>easysui-core</module>
         <module>easysui-distribute-lock</module>
+        <module>easysui-dubbo</module>
         <module>easysui-http</module>
         <module>easysui-log</module>
         <module>easysui-mq</module>
@@ -49,6 +50,7 @@
         <spring-boot.version>2.1.4.RELEASE</spring-boot.version>
         <curator-recipes.version>4.0.1</curator-recipes.version>
         <zkclient.version>0.10</zkclient.version>
+        <dubbo.version>2.6.2</dubbo.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -197,6 +199,11 @@
                 <version>${spring-boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>dubbo</artifactId>
+                <version>${dubbo.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

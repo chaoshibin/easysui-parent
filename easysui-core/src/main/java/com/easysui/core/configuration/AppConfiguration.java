@@ -11,6 +11,12 @@ import lombok.ToString;
 @Setter
 @ToString
 public class AppConfiguration {
+    /**
+     * 应用名称
+     */
     private String appName;
+    /**
+     * 节点ID
+     */
     private String nodeId;
 }

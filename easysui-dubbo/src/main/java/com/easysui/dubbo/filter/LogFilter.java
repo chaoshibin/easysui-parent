@@ -10,6 +10,7 @@ import com.easysui.core.util.JsonUtil;
 import com.easysui.log.annotation.EasyLog;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.StopWatch;
 import org.slf4j.MDC;
 import org.springframework.core.annotation.AnnotationUtils;
 
@@ -66,10 +67,11 @@ public class LogFilter implements Filter {
             log.error("获取注解方法异常", e);
         }
         String text = StringUtils.left(JsonUtil.toJSON(arguments), 2000);
+        StopWatch stopWatch = StopWatch.createStarted();
         if (Objects.isNull(easyLog)) {
             log.info("RpcMethod={}, 请求报文={}", methodName, text);
             Result result = invoker.invoke(invocation);
-            log.info("RpcMethod={}, 请求报文={}, 响应报文={}", methodName, text, JsonUtil.toJSON(result.getValue()));
+            log.info("RpcMethod={}, 请求报文={}, 响应报文={}, 耗时{}", methodName, text, JsonUtil.toJSON(result.getValue()), stopWatch);
             if (result.hasException()) {
                 log.error("[###异常###] RpcMethod={}, 请求报文={}", methodName, text, result.getException());
             }
@@ -77,7 +79,7 @@ public class LogFilter implements Filter {
         }
         log.info("[{}] RpcMethod={}, 请求报文={}", easyLog.title(), methodName, text);
         Result result = invoker.invoke(invocation);
-        log.info("[{}] RpcMethod={}, 请求报文={}, 响应报文={}", easyLog.title(), methodName, text, JsonUtil.toJSON(result.getValue()));
+        log.info("[{}] RpcMethod={}, 请求报文={}, 响应报文={}, 耗时{}", easyLog.title(), methodName, text, JsonUtil.toJSON(result.getValue()), stopWatch);
         if (result.hasException()) {
             log.error("[{}###异常###] RpcMethod={}, 请求报文={}", easyLog.title(), methodName, text, result.getException());
         }

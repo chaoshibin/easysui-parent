@@ -4,6 +4,7 @@ import com.easysui.core.enums.ResultEnum;
 import com.easysui.core.util.AspectUtil;
 import com.easysui.core.util.JsonUtil;
 import com.easysui.log.annotation.EasyLog;
+import com.google.common.base.Stopwatch;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -37,13 +38,14 @@ public class EasyLogAspect {
         //请求报文
         String text = StringUtils.left(JsonUtil.toJSON(joinPoint.getArgs()), 2000);
         String methodName = AspectUtil.getMethodName(joinPoint);
+        Stopwatch stopWatch = Stopwatch.createStarted();
         try {
-            log.info("[{}] method={}, 请求报文={}", title, methodName, text);
+            log.info("[{}] method={}，请求报文={}", title, methodName, text);
             Object result = joinPoint.proceed();
-            log.info("[{}] method={}, 请求报文={}, 响应报文={}", title, methodName, text, JsonUtil.toJSON(result));
+            log.info("[{}] method={}，请求报文={}，响应报文={}，耗时{}", title, methodName, text, JsonUtil.toJSON(result), stopWatch);
             return result;
         } catch (Throwable e) {
-            log.error("[{}异常] method={}, 请求报文={}", title, methodName, text, e);
+            log.error("[{}异常] method={}，请求报文={}，耗时{}", title, methodName, text, stopWatch, e);
             //返回类型
             Class<?> returnType = AspectUtil.getReturnType(joinPoint);
             // 返回码属性域

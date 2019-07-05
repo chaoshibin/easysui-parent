@@ -7,7 +7,6 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
@@ -24,7 +23,7 @@ import java.util.List;
  * @author CHAO
  */
 @Slf4j
-@ConditionalOnProperty("easysui.http.max-total")
+@ConditionalOnProperty(prefix = "easysui.http", name = "enabled", havingValue = "true")
 public class RestTemplateConfiguration {
 
     @Bean
@@ -43,7 +42,7 @@ public class RestTemplateConfiguration {
     }
 
     @Bean
-   @ConditionalOnMissingBean({ClientHttpRequestFactory.class})
+    @ConditionalOnMissingBean({ClientHttpRequestFactory.class})
     public ClientHttpRequestFactory httpRequestFactory(HttpClient httpClient) {
         /*
          * Spring使用；两种方式实现http请求

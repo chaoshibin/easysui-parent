@@ -1,11 +1,6 @@
 package com.easysui.validate;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.Arrays;
-import java.util.concurrent.TimeUnit;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 /**
  * <p>
@@ -16,8 +11,6 @@ import java.util.stream.Stream;
  **/
 public class SortTest {
     public static void main(String[] args) {
-
-        System.out.println(~(-1 << 5));
         System.out.println(~(-1L << 5));
         int[] src = {43, 435, 532, 4, 53, 7456, 2342, 33, 231};
         System.out.println("bubbleSort = " + Arrays.toString(bubbleSort(src)));

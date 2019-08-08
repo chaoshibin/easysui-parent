@@ -1,6 +1,10 @@
 package com.easysui.validate;
 
+import lombok.SneakyThrows;
+
 import java.util.Arrays;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * <p>
@@ -10,12 +14,22 @@ import java.util.Arrays;
  * @since 2019/7/5
  **/
 public class SortTest {
+    // 实例化一个ReentrantLock对象
+    private static ReentrantLock lock = new ReentrantLock();
+    // 为线程A注册一个Condition
+    public static Condition conditionA = lock.newCondition();
+
+    @SneakyThrows
     public static void main(String[] args) {
+        conditionA.await();
+        conditionA.signal();
+
         System.out.println(~(-1L << 5));
         int[] src = {43, 435, 532, 4, 53, 7456, 2342, 33, 231};
         System.out.println("bubbleSort = " + Arrays.toString(bubbleSort(src)));
         System.out.println("selectionSort = " + Arrays.toString(selectionSort(src)));
         System.out.println("insertSort = " + Arrays.toString(insertSort(src)));
+        System.out.println("quickSort = " + Arrays.toString(quickSort(src, 0, src.length - 1)));
     }
 
     public static int[] bubbleSort(int[] src) {
@@ -80,5 +94,55 @@ public class SortTest {
             }
         }
         return arr;
+    }
+
+    public static int[] quickSort(int[] src, int left, int rigth) {
+        int[] arr = Arrays.copyOf(src, src.length);
+        //比较左边找的
+        int ll = left;
+        //标记右边找的位置
+        int rr = rigth;
+
+        int base = src[left];
+
+        while (ll < rr) {
+            //从序列最后后面往前面找，找到第一个比基准数少的那个数，进行交换
+            while (ll < rr && src[rr] >= base) {
+                rr--;
+            }
+            if (ll < rr) {
+                int temp = src[rr];
+                src[rr] = src[ll];
+                src[ll] = temp;
+                ll++;
+            }
+            //从序列的最前面往后面找，找到第一个比基准数大的那个进行交换
+            while (ll < rr && src[ll] <= base) {
+                ll++;
+            }
+            if (ll < rr) {
+                int temp = src[rr];
+                src[rr] = src[ll];
+                src[ll] = temp;
+                rr--;
+            }
+            print(src);
+            //发现以45位中心 左边的都比45小，右边的都比45大。到此我们就完成了一遍排序。接下来只要对45的左边和右边做同样的操作 即可
+            if (ll > left) {
+                quickSort(src, left, ll - 1);
+            }
+            if (rr < rigth) {
+                quickSort(src, ll + 1, rigth);
+            }
+        }
+        return arr;
+    }
+
+    public static void print(int[] data) {
+        System.out.println("排序的过程：");
+        for (int i = 0, len = data.length; i < len; i++) {
+            System.out.print(data[i] + " ");
+        }
+        System.out.println();
     }
 }

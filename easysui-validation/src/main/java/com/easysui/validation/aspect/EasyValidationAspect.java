@@ -1,9 +1,9 @@
-package com.easysui.validate.aspect;
+package com.easysui.validation.aspect;
 
 import com.easysui.core.util.AspectUtil;
 import com.easysui.core.util.Result;
-import com.easysui.validate.util.ValidateUtil;
-import com.easysui.validate.annotation.EasyValidate;
+import com.easysui.validation.annotation.EasyValidation;
+import com.easysui.validation.util.ValidationUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -18,28 +18,28 @@ import java.util.Arrays;
  */
 @Slf4j
 @Aspect
-@Order(-2147483646)
-public class EasyValidateAspect {
+@Order(Integer.MIN_VALUE + 1)
+public class EasyValidationAspect {
 
-    @Pointcut("@annotation(com.easysui.validate.annotation.EasyValidate)")
+    @Pointcut("@annotation(com.easysui.validation.annotation.EasyValidation)")
     public void pointCut() {
 
     }
 
     @Around("pointCut()")
     public Object methodProcess(ProceedingJoinPoint joinPoint) throws Throwable {
-        Result<String> result = ValidateUtil.validate(Arrays.asList(joinPoint.getArgs()));
+        Result<String> result = ValidationUtil.validate(Arrays.asList(joinPoint.getArgs()));
         //验证失败
         if (result.isError()) {
             //返回类型
             Class<?> returnType = AspectUtil.getReturnType(joinPoint);
-            EasyValidate easyValidateAnnotation = AspectUtil.getMethod(joinPoint).getAnnotation(EasyValidate.class);
+            EasyValidation easyValidationAnnotation = AspectUtil.getMethod(joinPoint).getAnnotation(EasyValidation.class);
             //错误码域
-            String codeField = easyValidateAnnotation.codeField();
+            String codeField = easyValidationAnnotation.codeField();
             //错误信息域
-            String msgField = easyValidateAnnotation.msgField();
+            String msgField = easyValidationAnnotation.msgField();
             //验证失败错误码
-            String code = easyValidateAnnotation.code();
+            String code = easyValidationAnnotation.code();
             return AspectUtil.buildResult(returnType, codeField, msgField, code, result.getMsg());
         }
         return joinPoint.proceed();

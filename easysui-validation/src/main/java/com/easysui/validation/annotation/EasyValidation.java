@@ -1,4 +1,4 @@
-package com.easysui.validate.annotation;
+package com.easysui.validation.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface EasyValidate {
+public @interface EasyValidation {
     /**
      * 错误码域
      */

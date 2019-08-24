@@ -16,6 +16,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -25,6 +26,7 @@ import java.util.Objects;
  */
 @Slf4j
 @Aspect
+@Order
 public class EasyCacheAspect {
     @Autowired
     private RedisService redisService;
@@ -43,7 +45,7 @@ public class EasyCacheAspect {
         Object cacheValue = redisService.get(cacheInfo.getKey(), AspectUtil.getReturnType(joinPoint));
         if (Objects.nonNull(cacheValue)) {
             //1.1和1.2处协同解决缓存击穿     1.1
-            return this.getIfNull(cacheValue);
+            return this.defaultIfNull(cacheValue);
         }
         return this.doCachePutProceed(joinPoint, cacheInfo);
     }
@@ -58,11 +60,13 @@ public class EasyCacheAspect {
         return joinPoint.proceed();
     }
 
-    private Object doCachePutProceed(ProceedingJoinPoint joinPoint, CacheInfo cacheputInfo) throws Throwable {
+    private Object doCachePutProceed(ProceedingJoinPoint joinPoint, CacheInfo cacheInfo) throws Throwable {
         Object result = joinPoint.proceed();
-        // 1.1和1.2处协同解决缓存击穿      1.2
-        Serializable value = (Serializable) this.putIfNull(result);
-        redisService.set(cacheputInfo.getKey(), value, cacheputInfo.getExpireSeconds());
+        if (Objects.nonNull(result) || cacheInfo.isCacheNull()) {
+            // 1.1和1.2处协同解决缓存击穿      1.2
+            Serializable value = (Serializable) this.putIfNull(result);
+            redisService.set(cacheInfo.getKey(), value, cacheInfo.getExpireSeconds());
+        }
         return result;
     }
 
@@ -70,7 +74,7 @@ public class EasyCacheAspect {
         return Objects.isNull(value) ? StrConst.NULL : value;
     }
 
-    private Object getIfNull(Object value) {
+    private Object defaultIfNull(Object value) {
         return Objects.equals(StrConst.NULL, value) ? null : value;
     }
 
@@ -88,7 +92,7 @@ public class EasyCacheAspect {
         //缓存key
         String contactKey = AspectUtil.contactValue(pjp, annotation.key());
         String key = this.buildKey(annotation.cacheName(), contactKey);
-        return CacheInfo.builder().key(key).expireSeconds(expireSeconds).build();
+        return CacheInfo.builder().key(key).expireSeconds(expireSeconds).cacheNull(annotation.cacheNull()).build();
     }
 
     @Setter
@@ -97,5 +101,6 @@ public class EasyCacheAspect {
     private static class CacheInfo {
         private String key;
         private long expireSeconds;
+        private boolean cacheNull;
     }
 }

@@ -28,6 +28,11 @@ public @interface EasyCachePut {
     long expireSeconds() default 0L;
 
     /**
+     * if false, 不对null值进行缓存
+     */
+    boolean cacheNull() default true;
+
+    /**
      * 不受缓存干预策略影响但会过期(暂未实现)
      */
     //boolean alwaysCache() default false;

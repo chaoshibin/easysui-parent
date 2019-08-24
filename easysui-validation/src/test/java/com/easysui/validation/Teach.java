@@ -1,4 +1,4 @@
-package com.easysui.validate;
+package com.easysui.validation;
 
 import lombok.experimental.UtilityClass;
 

@@ -20,7 +20,7 @@ import java.lang.reflect.Method;
  */
 @Slf4j
 @Aspect
-@Order(-2147483647)
+@Order(Integer.MIN_VALUE)
 public class EasyLogAspect {
 
     @Pointcut("@annotation(com.easysui.log.annotation.EasyLog)")

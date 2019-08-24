@@ -53,7 +53,7 @@
         </dependency>
         <dependency>
             <groupId>com.easysui</groupId>
-            <artifactId>easysui-validate</artifactId>
+            <artifactId>easysui-validation</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>

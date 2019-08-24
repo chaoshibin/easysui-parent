@@ -7,5 +7,5 @@ public final class ConstantPool {
     //服务端IP
     public static final String SERVER_IP = "serverIp";
     //请求唯一标识
-    public static final String REQUEST_ID = "requestID";
+    public static final String REQUEST_ID = "requestId";
 }

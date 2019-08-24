@@ -1,4 +1,4 @@
-package com.easysui.validate.util;
+package com.easysui.validation.util;
 
 import com.easysui.core.util.Result;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +15,7 @@ import java.util.Set;
  * @author CHAO 2019/4/17
  */
 @Slf4j
-public class ValidateUtil {
+public class ValidationUtil {
 
     private static final Validator VALIDATOR = Validation.buildDefaultValidatorFactory().getValidator();
 

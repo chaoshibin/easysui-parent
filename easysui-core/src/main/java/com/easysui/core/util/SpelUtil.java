@@ -2,6 +2,8 @@ package com.easysui.core.util;
 
 import com.easysui.core.constant.StrConst;
 import com.google.common.collect.Maps;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.expression.EvaluationContext;
@@ -14,6 +16,7 @@ import java.util.Map;
 /**
  * @author CHAO 2019/5/14 12:57
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class SpelUtil {
 
     public static String parseValue(String expression, String[] parameterNames, Object[] args) {
@@ -42,9 +45,7 @@ public final class SpelUtil {
         //创建SPEL上下文
         EvaluationContext evaluationContext = new StandardEvaluationContext();
         //把方法参数放入SPEL上下文中
-        for (String key : argMap.keySet()) {
-            evaluationContext.setVariable(key, argMap.get(key));
-        }
+        argMap.forEach((key, value) -> evaluationContext.setVariable(key, argMap.get(key)));
         return parser.parseExpression(expression).getValue(evaluationContext, String.class);
     }
 }

@@ -5,10 +5,31 @@ package com.easysui.redis.service;
  */
 public interface RedisService {
 
+    /**
+     * set value
+     *
+     * @param key           key
+     * @param value         value
+     * @param expireSeconds 过期时间
+     * @param <T>           value类型
+     */
     <T> void set(String key, T value, long expireSeconds);
 
+    /**
+     * get value
+     *
+     * @param key   key
+     * @param clazz 类
+     * @param <T>   类型
+     * @return value
+     */
     <T> T get(String key, Class<T> clazz);
 
+    /**
+     * delete value
+     *
+     * @param key key
+     */
     void del(String key);
 
     /**

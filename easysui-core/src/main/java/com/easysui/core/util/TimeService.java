@@ -1,5 +1,8 @@
 package com.easysui.core.util;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * <p>
  *
@@ -8,6 +11,7 @@ package com.easysui.core.util;
  * @author CHAO
  * @since 2019/7/11
  **/
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class TimeService {
 
     public static long getCurrentMillis() {

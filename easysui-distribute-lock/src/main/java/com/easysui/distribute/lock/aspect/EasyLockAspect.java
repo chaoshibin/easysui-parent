@@ -43,7 +43,7 @@ public class EasyLockAspect {
     public Object methodProcess(ProceedingJoinPoint joinPoint) throws Throwable {
         EasyLock annotation = AspectUtil.getAnnotationOnMethod(joinPoint, EasyLock.class);
         String lockKey = buildLockKey(joinPoint, annotation);
-        String requestId = CodecUtil.createUUID();
+        String requestId = CodecUtil.createUuid();
         DistributeLockService lockService = lockServiceMap.get(annotation.type());
         if (Objects.isNull(lockService)) {
             Class<?> returnType = AspectUtil.getReturnType(joinPoint);

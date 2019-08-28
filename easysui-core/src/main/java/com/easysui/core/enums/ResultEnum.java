@@ -3,6 +3,7 @@ package com.easysui.core.enums;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.ToString;
 
 /**
  * 功能描述:
@@ -15,6 +16,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
+@ToString
 public enum ResultEnum {
     OK("OK", "成功"),
     ERROR("ERROR", "失败"),

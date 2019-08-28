@@ -3,7 +3,10 @@ package com.easysui.dubbo.filter;
 
 import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.extension.Activate;
-import com.alibaba.dubbo.rpc.*;
+import com.alibaba.dubbo.rpc.Filter;
+import com.alibaba.dubbo.rpc.Invocation;
+import com.alibaba.dubbo.rpc.Invoker;
+import com.alibaba.dubbo.rpc.Result;
 import com.easysui.log.annotation.EasyLog;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ArrayUtils;
@@ -22,7 +25,7 @@ import java.util.Objects;
 @Activate(group = {Constants.PROVIDER, Constants.CONSUMER})
 public class LogFilter implements Filter {
     @Override
-    public Result invoke(final Invoker<?> invoker, final Invocation invocation) throws RpcException {
+    public Result invoke(final Invoker<?> invoker, final Invocation invocation) {
         Class clazz = invoker.getInterface();
         Class[] args = invocation.getParameterTypes();
         final Object[] arguments = invocation.getArguments();

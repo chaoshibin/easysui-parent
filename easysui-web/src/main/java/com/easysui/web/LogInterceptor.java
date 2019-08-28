@@ -21,7 +21,7 @@ public class LogInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
-        String requestId = CodecUtil.createUUID();
+        String requestId = CodecUtil.createUuid();
         log.info("requestId:{}, clientIp:{}, X-Forwarded-For:{}", requestId, httpServletRequest.getRemoteAddr(),
                 StringUtils.defaultString(httpServletRequest.getHeader("X-Forwarded-For")));
         MDC.put(ConstantPool.REQUEST_ID, requestId);

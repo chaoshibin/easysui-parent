@@ -26,8 +26,6 @@ public final class JsonUtil {
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     static {
-        //设置NULL值不进行序列化
-        //OBJECT_MAPPER.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         //空对象不抛异常 e.g. handler{ }
         OBJECT_MAPPER.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
         //解析JSON时忽略未知属性
@@ -43,7 +41,7 @@ public final class JsonUtil {
      * @param <T> 泛型
      * @return JSON
      */
-    public static <T> String toJSON(T obj) {
+    public static <T> String toJson(T obj) {
         try {
             return OBJECT_MAPPER.writeValueAsString(obj);
         } catch (Exception e) {
@@ -57,7 +55,7 @@ public final class JsonUtil {
      * @param <T>  泛型
      * @return POJO
      */
-    public static <T> T fromJSON(String text, Class<T> clzz) {
+    public static <T> T fromJson(String text, Class<T> clzz) {
         try {
             return OBJECT_MAPPER.readValue(text, clzz);
         } catch (IOException e) {
@@ -65,7 +63,7 @@ public final class JsonUtil {
         }
     }
 
-    public static JsonNode fromJSON(String text) {
+    public static JsonNode fromJson(String text) {
         try {
             return OBJECT_MAPPER.readTree(text);
         } catch (IOException e) {
@@ -73,7 +71,7 @@ public final class JsonUtil {
         }
     }
 
-    public static <T> T fromJSON(String text, TypeReference<T> valueTypeRef) {
+    public static <T> T fromJson(String text, TypeReference<T> valueTypeRef) {
         try {
             return OBJECT_MAPPER.readValue(text, valueTypeRef);
         } catch (IOException e) {

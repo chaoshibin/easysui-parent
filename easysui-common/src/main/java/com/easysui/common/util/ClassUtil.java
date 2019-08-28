@@ -17,7 +17,7 @@ public final class ClassUtil {
     }
 
     public static <T> Class<? extends T> loadClass(String className, Class<T> clazz) {
-        Class<? extends T> subclass = null;
+        Class<? extends T> subclass;
         try {
             subclass = Class.forName(className).asSubclass(clazz);
         } catch (ClassNotFoundException e) {

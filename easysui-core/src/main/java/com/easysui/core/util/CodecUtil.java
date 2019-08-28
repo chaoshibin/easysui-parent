@@ -26,7 +26,7 @@ public final class CodecUtil {
     /**
      * 将 URL 编码
      */
-    public static String encodeURL(String str) {
+    public static String encodeUrl(String str) {
         String target;
         try {
             target = URLEncoder.encode(str, UTF_8);
@@ -40,7 +40,7 @@ public final class CodecUtil {
     /**
      * 将 URL 解码
      */
-    public static String decodeURL(String str) {
+    public static String decodeUrl(String str) {
         String target;
         try {
             target = URLDecoder.decode(str, UTF_8);
@@ -54,7 +54,7 @@ public final class CodecUtil {
     /**
      * 将字符串 Base64 编码
      */
-    public static String encodeBASE64(String str) {
+    public static String encodeBase64(String str) {
         String target;
         try {
             target = Base64.encodeBase64URLSafeString(str.getBytes(UTF_8));
@@ -68,7 +68,7 @@ public final class CodecUtil {
     /**
      * 将字符串 Base64 解码
      */
-    public static String decodeBASE64(String str) {
+    public static String decodeBase64(String str) {
         String target;
         try {
             target = new String(Base64.decodeBase64(str), UTF_8);
@@ -82,7 +82,7 @@ public final class CodecUtil {
     /**
      * 将字符串 MD5 加密
      */
-    public static String encryptMD5(String str) {
+    public static String encryptMd5(String str) {
         return DigestUtils.md5Hex(str);
     }
 
@@ -92,7 +92,7 @@ public final class CodecUtil {
      * @param str
      * @return 32位
      */
-    public static String encryptSHA1(String str) {
+    public static String encryptSha1(String str) {
         return DigestUtils.sha1Hex(str);
     }
 
@@ -103,7 +103,7 @@ public final class CodecUtil {
      * @param str
      * @return 64位
      */
-    public static String encryptSHA256(String str) {
+    public static String encryptSha256(String str) {
         return DigestUtils.sha256Hex(str);
     }
 
@@ -117,7 +117,7 @@ public final class CodecUtil {
     /**
      * 获取 UUID（32位）
      */
-    public static String createUUID() {
+    public static String createUuid() {
         return UUID.randomUUID().toString().replaceAll("-", "");
     }
 }

@@ -3,7 +3,6 @@ package com.easysui.mybatis.properties;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * 属性配置

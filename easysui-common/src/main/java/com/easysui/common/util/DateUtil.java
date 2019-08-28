@@ -50,7 +50,7 @@ public final class DateUtil extends DateUtils {
      * @param date
      * @return
      */
-    public static String formatYMD(Date date) {
+    public static String formatYmd(Date date) {
         return format(date, YYYY_MM_DD);
     }
 
@@ -60,7 +60,7 @@ public final class DateUtil extends DateUtils {
      * @param dateStr
      * @return
      */
-    public static Date parseYMD(String dateStr) {
+    public static Date parseYmd(String dateStr) {
         return parse(dateStr, YYYY_MM_DD);
     }
 
@@ -70,7 +70,7 @@ public final class DateUtil extends DateUtils {
      * @param date
      * @return
      */
-    public static String formatYMDWithoutSeparate(Date date) {
+    public static String formatYmdWithoutSeparate(Date date) {
         return format(date, YYYYMMDD);
     }
 
@@ -80,7 +80,7 @@ public final class DateUtil extends DateUtils {
      * @param dateStr
      * @return
      */
-    public static Date parseYMDWithoutSeparate(String dateStr) {
+    public static Date parseYmdWithoutSeparate(String dateStr) {
         return parse(dateStr, YYYYMMDD);
     }
 

@@ -10,7 +10,9 @@ import com.esotericsoftware.kryo.serializers.BeanSerializer;
  * @author CHAO 2019/5/14 1:31
  */
 public class KryoSerializerOrNull implements Serializer {
-    // 由于kryo不是线程安全的，所以每个线程都使用独立的kryo
+    /**
+     * 由于kryo不是线程安全的，所以每个线程都使用独立的kryo
+     */
     final ThreadLocal<Kryo> kryoLocal = new ThreadLocal<Kryo>() {
         @Override
         protected Kryo initialValue() {

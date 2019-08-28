@@ -15,7 +15,7 @@ import com.easysui.core.enums.ResultEnum;
 public final class RpcException extends RuntimeException {
     private static final long serialVersionUID = 1L;
 
-    private String code;
+    private final String code;
 
     public RpcException(String code, String message) {
         super(message);

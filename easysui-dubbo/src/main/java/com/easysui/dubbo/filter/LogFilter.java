@@ -4,9 +4,9 @@ package com.easysui.dubbo.filter;
 import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.extension.Activate;
 import com.alibaba.dubbo.rpc.*;
-import com.easysui.core.util.JsonUtil;
 import com.easysui.log.annotation.EasyLog;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.StopWatch;
 import org.springframework.core.annotation.AnnotationUtils;
@@ -40,11 +40,11 @@ public class LogFilter implements Filter {
         if (Objects.isNull(easyLog)) {
             return invoker.invoke(invocation);
         }
-        String text = StringUtils.left(JsonUtil.toJSON(arguments), 2000);
+        String text = StringUtils.left(ArrayUtils.toString(arguments), 2000);
         StopWatch stopWatch = StopWatch.createStarted();
         log.info("[{}] RpcMethod={}, 请求报文={}", easyLog.title(), methodName, text);
         Result result = invoker.invoke(invocation);
-        log.info("[{}] RpcMethod={}, 请求报文={}, 响应报文={}, 耗时{}", easyLog.title(), methodName, text, JsonUtil.toJSON(result.getValue()), stopWatch);
+        log.info("[{}] RpcMethod={}, 请求报文={}, 响应报文={}, 耗时{}", easyLog.title(), methodName, text, result.getValue(), stopWatch);
         if (result.hasException()) {
             log.error("[{}###异常###] RpcMethod={}, 请求报文={}", easyLog.title(), methodName, text, result.getException());
         }

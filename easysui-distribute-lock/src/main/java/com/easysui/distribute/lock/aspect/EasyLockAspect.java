@@ -27,7 +27,7 @@ import java.util.Objects;
 @Aspect
 @Order(-1)
 public class EasyLockAspect {
-    private final static String LOCK_ERROR_MSG_FORMAT = ResultEnum.DISTRIBUTE_LOCK_FAIL.getMsg() + ",lockKey=%s";
+    private static final String LOCK_ERROR_MSG_FORMAT = ResultEnum.DISTRIBUTE_LOCK_FAIL.getMsg() + ",lockKey=%s";
     private Map<LockEnum, DistributeLockService> lockServiceMap = Maps.newHashMap();
 
     @Resource
@@ -37,6 +37,7 @@ public class EasyLockAspect {
 
     @Pointcut("@annotation(com.easysui.distribute.lock.annotation.EasyLock)")
     public void pointCut() {
+        //pointcut
     }
 
     @Around("pointCut()")

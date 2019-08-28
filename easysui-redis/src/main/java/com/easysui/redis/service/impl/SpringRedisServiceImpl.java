@@ -40,7 +40,7 @@ public class SpringRedisServiceImpl implements RedisService {
     @Override
     public String buildKey(String key) {
         if (StringUtils.isBlank(appConfiguration.getAppName())) {
-            throw new RuntimeException("未读取到app-name属性");
+            throw new IllegalArgumentException("未读取到app-name属性");
         }
         return StringFormatUtils.format(appConfiguration.getAppName(), key);
     }

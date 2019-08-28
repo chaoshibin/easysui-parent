@@ -25,7 +25,7 @@ public class EasyLogAspect {
 
     @Pointcut("@annotation(com.easysui.log.annotation.EasyLog)")
     public void pointCut() {
-
+        //pointcut
     }
 
     @Around("pointCut()")

@@ -1,5 +1,6 @@
 package com.easysui.mybatis.config;
 
+import com.easysui.core.exception.NecessaryException;
 import com.easysui.mybatis.properties.MyBatisProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -55,7 +56,7 @@ public class MyBatisAutoConfiguration {
                 return factory.getObject();
             } catch (Exception e) {
                 log.error("Could not configure mybatis session factory", e);
-                throw new RuntimeException("SqlSessionFactory create failure");
+                throw new NecessaryException("SqlSessionFactory create failure");
             }
         }
 

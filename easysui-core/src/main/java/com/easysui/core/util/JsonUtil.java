@@ -1,5 +1,6 @@
 package com.easysui.core.util;
 
+import com.easysui.core.exception.NecessaryException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -45,7 +46,8 @@ public final class JsonUtil {
         try {
             return OBJECT_MAPPER.writeValueAsString(obj);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            log.error("to json failure", e);
+            throw new NecessaryException(e);
         }
     }
 
@@ -59,7 +61,8 @@ public final class JsonUtil {
         try {
             return OBJECT_MAPPER.readValue(text, clzz);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            log.error("fromJson failure", e);
+            throw new NecessaryException(e);
         }
     }
 
@@ -67,7 +70,8 @@ public final class JsonUtil {
         try {
             return OBJECT_MAPPER.readTree(text);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            log.error("from json failure", e);
+            throw new NecessaryException(e);
         }
     }
 
@@ -75,7 +79,8 @@ public final class JsonUtil {
         try {
             return OBJECT_MAPPER.readValue(text, valueTypeRef);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            log.error("from json failure", e);
+            throw new NecessaryException(e);
         }
     }
 
@@ -89,7 +94,8 @@ public final class JsonUtil {
         try {
             return OBJECT_MAPPER.readValue(src, OBJECT_MAPPER.constructType(clzz));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            log.error("from byte failure", e);
+            throw new NecessaryException(e);
         }
     }
 
@@ -103,7 +109,8 @@ public final class JsonUtil {
         try {
             return OBJECT_MAPPER.readValue(text, clzz);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            log.error("parseObject failure", e);
+            throw new NecessaryException(e);
         }
     }
 
@@ -117,7 +124,8 @@ public final class JsonUtil {
         try {
             return OBJECT_MAPPER.convertValue(map, OBJECT_MAPPER.getTypeFactory().constructType(clzz));
         } catch (IllegalArgumentException e) {
-            throw new RuntimeException(e);
+            log.error("fromMap failure", e);
+            throw new NecessaryException(e);
         }
     }
 
@@ -131,7 +139,8 @@ public final class JsonUtil {
         try {
             return OBJECT_MAPPER.readValue(text, OBJECT_MAPPER.getTypeFactory().constructParametricType(ArrayList.class, clzz));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            log.error("fromJsonToList failure", e);
+            throw new NecessaryException(e);
         }
     }
 }

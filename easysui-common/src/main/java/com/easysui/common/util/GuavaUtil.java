@@ -1,6 +1,8 @@
 package com.easysui.common.util;
 
 import com.google.common.base.Joiner;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
 import java.util.Map;
 
@@ -13,6 +15,7 @@ import java.util.Map;
  * @version 1.0.0
  * @since 1.0.0
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class GuavaUtil {
     private static final Joiner.MapJoiner JOINER = Joiner.on("&").withKeyValueSeparator("=").useForNull("");
 

@@ -23,7 +23,7 @@ public class EasyValidateAspect {
 
     @Pointcut("@annotation(com.easysui.validate.annotation.EasyValidate)")
     public void pointCut() {
-
+        //pointcut
     }
 
     @Around("pointCut()")

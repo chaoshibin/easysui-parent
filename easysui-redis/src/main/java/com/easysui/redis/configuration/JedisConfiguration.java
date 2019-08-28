@@ -11,6 +11,7 @@ import redis.clients.jedis.JedisPoolConfig;
 
 /**
  * @author CHAO 2019/5/19 0:55
+ * @deprecated without jedis
  */
 
 @Slf4j

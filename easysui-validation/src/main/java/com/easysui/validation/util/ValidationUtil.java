@@ -1,4 +1,4 @@
-package com.easysui.validate.util;
+package com.easysui.validation.util;
 
 import com.easysui.core.util.Result;
 import lombok.AccessLevel;
@@ -18,7 +18,7 @@ import java.util.Set;
  */
 @Slf4j
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class ValidateUtil {
+public class ValidationUtil {
 
     private static final Validator VALIDATOR = Validation.buildDefaultValidatorFactory().getValidator();
 

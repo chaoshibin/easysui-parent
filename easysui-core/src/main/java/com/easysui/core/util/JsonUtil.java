@@ -1,5 +1,6 @@
 package com.easysui.core.util;
 
+import com.easysui.core.exception.NecessaryException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -26,8 +27,6 @@ public final class JsonUtil {
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     static {
-        //设置NULL值不进行序列化
-        //OBJECT_MAPPER.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         //空对象不抛异常 e.g. handler{ }
         OBJECT_MAPPER.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
         //解析JSON时忽略未知属性
@@ -43,11 +42,12 @@ public final class JsonUtil {
      * @param <T> 泛型
      * @return JSON
      */
-    public static <T> String toJSON(T obj) {
+    public static <T> String toJson(T obj) {
         try {
             return OBJECT_MAPPER.writeValueAsString(obj);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            log.error("to json failure", e);
+            throw new NecessaryException(e);
         }
     }
 
@@ -57,27 +57,30 @@ public final class JsonUtil {
      * @param <T>  泛型
      * @return POJO
      */
-    public static <T> T fromJSON(String text, Class<T> clzz) {
+    public static <T> T fromJson(String text, Class<T> clzz) {
         try {
             return OBJECT_MAPPER.readValue(text, clzz);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            log.error("fromJson failure", e);
+            throw new NecessaryException(e);
         }
     }
 
-    public static JsonNode fromJSON(String text) {
+    public static JsonNode fromJson(String text) {
         try {
             return OBJECT_MAPPER.readTree(text);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            log.error("from json failure", e);
+            throw new NecessaryException(e);
         }
     }
 
-    public static <T> T fromJSON(String text, TypeReference<T> valueTypeRef) {
+    public static <T> T fromJson(String text, TypeReference<T> valueTypeRef) {
         try {
             return OBJECT_MAPPER.readValue(text, valueTypeRef);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            log.error("from json failure", e);
+            throw new NecessaryException(e);
         }
     }
 
@@ -91,7 +94,8 @@ public final class JsonUtil {
         try {
             return OBJECT_MAPPER.readValue(src, OBJECT_MAPPER.constructType(clzz));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            log.error("from byte failure", e);
+            throw new NecessaryException(e);
         }
     }
 
@@ -105,7 +109,8 @@ public final class JsonUtil {
         try {
             return OBJECT_MAPPER.readValue(text, clzz);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            log.error("parseObject failure", e);
+            throw new NecessaryException(e);
         }
     }
 
@@ -119,7 +124,8 @@ public final class JsonUtil {
         try {
             return OBJECT_MAPPER.convertValue(map, OBJECT_MAPPER.getTypeFactory().constructType(clzz));
         } catch (IllegalArgumentException e) {
-            throw new RuntimeException(e);
+            log.error("fromMap failure", e);
+            throw new NecessaryException(e);
         }
     }
 
@@ -133,7 +139,8 @@ public final class JsonUtil {
         try {
             return OBJECT_MAPPER.readValue(text, OBJECT_MAPPER.getTypeFactory().constructParametricType(ArrayList.class, clzz));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            log.error("fromJsonToList failure", e);
+            throw new NecessaryException(e);
         }
     }
 }

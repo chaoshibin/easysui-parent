@@ -1,5 +1,6 @@
 package com.easysui.zookeeper.util;
 
+import lombok.SneakyThrows;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.zookeeper.CreateMode;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,15 +12,12 @@ public class ZkUtil {
     @Autowired
     private CuratorFramework curatorFramework;
 
+    @SneakyThrows
     public boolean sharedLock(String path) {
-        try {
-            String path1 = curatorFramework.create()
-                    .creatingParentContainersIfNeeded()
-                    .withMode(CreateMode.EPHEMERAL_SEQUENTIAL)
-                    .forPath(path);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        curatorFramework.create()
+                .creatingParentContainersIfNeeded()
+                .withMode(CreateMode.EPHEMERAL_SEQUENTIAL)
+                .forPath(path);
         return false;
     }
 }

@@ -10,11 +10,9 @@ import java.io.Serializable;
  * <p/>
  *
  * @author CHAO 新增日期：2018/9/19
- * @author CHAO 修改日期：2018/9/19
- * @version 1.0.0
  * @since 1.0.0
  */
-public abstract class StringSerializable implements Serializable {
+public abstract class BaseSerializable implements Serializable {
 
 
     @Override

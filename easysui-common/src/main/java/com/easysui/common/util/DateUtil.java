@@ -1,9 +1,9 @@
 package com.easysui.common.util;
 
+import lombok.SneakyThrows;
 import org.apache.commons.lang3.time.DateUtils;
 import org.apache.commons.lang3.time.FastDateFormat;
 
-import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -26,9 +26,6 @@ public final class DateUtil extends DateUtils {
 
     /**
      * 默认格式 yyyy-MM-dd HH:mm:ss
-     *
-     * @param date
-     * @return
      */
     public static String formatDefault(Date date) {
         return format(date, YYYY_MM_DD_HH_MM_SS);
@@ -38,7 +35,7 @@ public final class DateUtil extends DateUtils {
      * 解析日期默认格式 yyyy-MM-dd HH:mm:ss
      *
      * @param dateStr Date
-     * @return
+     * @return date
      */
     public static Date parseDefault(String dateStr) {
         return parse(dateStr, YYYY_MM_DD_HH_MM_SS);
@@ -46,41 +43,29 @@ public final class DateUtil extends DateUtils {
 
     /**
      * 格式 yyyy-MM-dd
-     *
-     * @param date
-     * @return
      */
-    public static String formatYMD(Date date) {
+    public static String formatYmd(Date date) {
         return format(date, YYYY_MM_DD);
     }
 
     /**
      * 格式 yyyy-MM-dd
-     *
-     * @param dateStr
-     * @return
      */
-    public static Date parseYMD(String dateStr) {
+    public static Date parseYmd(String dateStr) {
         return parse(dateStr, YYYY_MM_DD);
     }
 
     /**
      * 格式 yyyyMMdd
-     *
-     * @param date
-     * @return
      */
-    public static String formatYMDWithoutSeparate(Date date) {
+    public static String formatYmdWithoutSeparate(Date date) {
         return format(date, YYYYMMDD);
     }
 
     /**
      * 格式 yyyyMMdd
-     *
-     * @param dateStr
-     * @return
      */
-    public static Date parseYMDWithoutSeparate(String dateStr) {
+    public static Date parseYmdWithoutSeparate(String dateStr) {
         return parse(dateStr, YYYYMMDD);
     }
 
@@ -103,16 +88,11 @@ public final class DateUtil extends DateUtils {
      *
      * @param dateStr Date
      * @param pattern 日期格式
-     * @return
+     * @return date
      */
+    @SneakyThrows
     public static Date parse(String dateStr, String pattern) {
-        Date date;
-        try {
-            date = FastDateFormat.getInstance(pattern).parse(dateStr);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
-        return date;
+        return FastDateFormat.getInstance(pattern).parse(dateStr);
     }
 
     public static Date dateOfBegin(Date date) {

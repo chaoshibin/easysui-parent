@@ -1,6 +1,6 @@
 package com.easysui.common.util;
 
-import lombok.extern.slf4j.Slf4j;
+import lombok.SneakyThrows;
 
 /**
  * 功能描述:
@@ -11,19 +11,12 @@ import lombok.extern.slf4j.Slf4j;
  * @version 1.0.0
  * @since 1.0.0
  */
-@Slf4j
 public final class ClassUtil {
     private ClassUtil() {
     }
 
+    @SneakyThrows
     public static <T> Class<? extends T> loadClass(String className, Class<T> clazz) {
-        Class<? extends T> subclass = null;
-        try {
-            subclass = Class.forName(className).asSubclass(clazz);
-        } catch (ClassNotFoundException e) {
-            log.error("load class failure", e);
-            throw new RuntimeException(e);
-        }
-        return subclass;
+        return Class.forName(className).asSubclass(clazz);
     }
 }

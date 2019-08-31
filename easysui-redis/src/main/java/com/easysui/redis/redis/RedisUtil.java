@@ -1,6 +1,8 @@
 package com.easysui.redis.redis;
 
 import com.easysui.core.spring.SpringBeanFactory;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -15,9 +17,10 @@ import java.util.Objects;
  * @author CHAO 2019/5/20 1:48
  */
 @Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class RedisUtil {
-    private final static StringRedisTemplate redisTemplate = SpringBeanFactory.get(StringRedisTemplate.class);
-    private final static String RELEASE_SCRIPT =
+    private static final StringRedisTemplate REDIS_TEMPLATE = SpringBeanFactory.get(StringRedisTemplate.class);
+    private static final String RELEASE_SCRIPT =
             "if redis.call('get', KEYS[1]) == ARGV[1] then return redis.call('del', KEYS[1]) else return 0 end";
     private static final String LOCK_SCRIPT =
             "if redis.call('setNx',KEYS[1],ARGV[1]) then if redis.call('get',KEYS[1])==ARGV[1] then " +
@@ -29,7 +32,7 @@ public final class RedisUtil {
 
 
     public static Boolean lockJedis(String lockKey, String requestId, long expireSeconds) {
-        return redisTemplate.execute((RedisCallback<Boolean>) redisConnection -> {
+        return REDIS_TEMPLATE.execute((RedisCallback<Boolean>) redisConnection -> {
             Jedis jedis = (Jedis) redisConnection.getNativeConnection();
             String result = jedis.set(lockKey, requestId, SET_IF_NOT_EXIST, SET_WITH_EXPIRE_TIME, expireSeconds);
             return Objects.equals(LOCK_SUCCESS, result);
@@ -38,7 +41,7 @@ public final class RedisUtil {
 
 
     public static Boolean unlockJedis(String lockKey, String requestId) {
-        return redisTemplate.execute((RedisCallback<Boolean>) redisConnection -> {
+        return REDIS_TEMPLATE.execute((RedisCallback<Boolean>) redisConnection -> {
             Jedis jedis = (Jedis) redisConnection.getNativeConnection();
             Object result = jedis.eval(RELEASE_SCRIPT, Collections.singletonList(lockKey), Collections.singletonList(requestId));
             return Objects.equals(RELEASE_SUCCESS, result);
@@ -47,13 +50,13 @@ public final class RedisUtil {
 
     public static boolean lock(String lockKey, String value, long expireTime) {
         RedisScript<String> redisScript = new DefaultRedisScript<>(LOCK_SCRIPT, String.class);
-        Object result = redisTemplate.execute(redisScript, Collections.singletonList(lockKey), value, expireTime);
+        Object result = REDIS_TEMPLATE.execute(redisScript, Collections.singletonList(lockKey), value, expireTime);
         return Objects.equals(LOCK_SUCCESS, result);
     }
 
     public static boolean unlock(String lockKey, String value) {
         RedisScript<String> redisScript = new DefaultRedisScript<>(RELEASE_SCRIPT, String.class);
-        Object result = redisTemplate.execute(redisScript, Collections.singletonList(lockKey), value);
+        Object result = REDIS_TEMPLATE.execute(redisScript, Collections.singletonList(lockKey), value);
         return Objects.equals(RELEASE_SUCCESS, result);
     }
 }

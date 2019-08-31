@@ -25,5 +25,5 @@ public class RestTemplateProperties {
     /**
      * 同路由的并发数
      */
-    private int defaultMaxPerRoute = new Double(maxTotal * 0.6).intValue();
+    private int defaultMaxPerRoute = (int) (maxTotal * 0.6);
 }

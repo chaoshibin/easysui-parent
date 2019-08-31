@@ -33,10 +33,12 @@ public class EasyCacheAspect {
 
     @Pointcut("@annotation(com.easysui.cache.annotation.EasyCachePut)")
     public void cachePutPointCut() {
+        //pointcut
     }
 
     @Pointcut("@annotation(com.easysui.cache.annotation.EasyCacheExpire)")
     public void cacheExpirePointCut() {
+        //pointcut
     }
 
     @Around("cachePutPointCut()")

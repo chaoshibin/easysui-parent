@@ -27,7 +27,7 @@ import java.util.Objects;
 @Aspect
 @Order(-1)
 public class EasyLockAspect {
-    private final static String LOCK_ERROR_MSG_FORMAT = ResultEnum.DISTRIBUTE_LOCK_FAIL.getMsg() + ",lockKey=%s";
+    private static final String LOCK_ERROR_MSG_FORMAT = ResultEnum.DISTRIBUTE_LOCK_FAIL.getMsg() + ",lockKey=%s";
     private Map<LockEnum, DistributeLockService> lockServiceMap = Maps.newHashMap();
 
     @Resource
@@ -37,13 +37,14 @@ public class EasyLockAspect {
 
     @Pointcut("@annotation(com.easysui.distribute.lock.annotation.EasyLock)")
     public void pointCut() {
+        //pointcut
     }
 
     @Around("pointCut()")
     public Object methodProcess(ProceedingJoinPoint joinPoint) throws Throwable {
         EasyLock annotation = AspectUtil.getAnnotationOnMethod(joinPoint, EasyLock.class);
         String lockKey = buildLockKey(joinPoint, annotation);
-        String requestId = CodecUtil.createUUID();
+        String requestId = CodecUtil.createUuid();
         DistributeLockService lockService = lockServiceMap.get(annotation.type());
         if (Objects.isNull(lockService)) {
             Class<?> returnType = AspectUtil.getReturnType(joinPoint);

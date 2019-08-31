@@ -23,6 +23,7 @@ public interface DistributeLockService {
      *
      * @param lockKey   锁标识
      * @param requestId 请求锁唯一ID用于实现可重入锁
+     * @return 是否成功获取锁
      */
     boolean unLock(String lockKey, String requestId);
 

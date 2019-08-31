@@ -2,7 +2,6 @@ package com.easysui.log.aspect;
 
 import com.easysui.core.enums.ResultEnum;
 import com.easysui.core.util.AspectUtil;
-import com.easysui.core.util.JsonUtil;
 import com.easysui.log.annotation.EasyLog;
 import com.google.common.base.Stopwatch;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +13,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.core.annotation.Order;
 
 import java.lang.reflect.Method;
+import java.util.Arrays;
 
 /**
  * @author CHAO 2019/4/16
@@ -25,7 +25,7 @@ public class EasyLogAspect {
 
     @Pointcut("@annotation(com.easysui.log.annotation.EasyLog)")
     public void pointCut() {
-
+        //pointcut
     }
 
     @Around("pointCut()")
@@ -36,13 +36,13 @@ public class EasyLogAspect {
         //获取日志标识
         String title = easyLogAnnotation.title();
         //请求报文
-        String text = StringUtils.left(JsonUtil.toJSON(joinPoint.getArgs()), 2000);
+        String text = StringUtils.left(Arrays.toString(joinPoint.getArgs()), 2000);
         String methodName = AspectUtil.getMethodName(joinPoint);
         Stopwatch stopWatch = Stopwatch.createStarted();
         try {
             log.info("[{}] method={}，请求报文={}", title, methodName, text);
             Object result = joinPoint.proceed();
-            log.info("[{}] method={}，请求报文={}，响应报文={}，耗时{}", title, methodName, text, JsonUtil.toJSON(result), stopWatch);
+            log.info("[{}] method={}，请求报文={}，响应报文={}，耗时{}", title, methodName, text, result, stopWatch);
             return result;
         } catch (Throwable e) {
             log.error("[{}异常] method={}，请求报文={}，耗时{}", title, methodName, text, stopWatch, e);

@@ -1,8 +1,6 @@
 package com.easysui.common.exception;
 
 
-import com.easysui.core.enums.ResultEnum;
-
 /**
  * 功能描述: 业务异常
  * <p/>
@@ -15,24 +13,7 @@ import com.easysui.core.enums.ResultEnum;
 public final class BusinessException extends RuntimeException {
     private static final long serialVersionUID = 1L;
 
-    private String code;
-
     public BusinessException(String message) {
         super(message);
-    }
-
-    public BusinessException(String code, String message) {
-        super(message);
-        this.code = code;
-    }
-
-
-    public BusinessException(ResultEnum result) {
-        super(result.getMsg());
-        this.code = result.getCode();
-    }
-
-    public String getCode() {
-        return code;
     }
 }

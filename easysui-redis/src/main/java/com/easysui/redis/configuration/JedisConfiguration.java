@@ -1,6 +1,5 @@
 package com.easysui.redis.configuration;
 
-import com.easysui.redis.redis.JedisUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -12,6 +11,7 @@ import redis.clients.jedis.JedisPoolConfig;
 
 /**
  * @author CHAO 2019/5/19 0:55
+ * @deprecated without jedis
  */
 
 @Slf4j
@@ -32,10 +32,5 @@ public class JedisConfiguration {
         config.setMaxWaitMillis(jedisProperties.getMaxWaitMillis());
         return new JedisPool(config, jedisProperties.getHost(),
                 jedisProperties.getPort(), 3000, jedisProperties.getPassword());
-    }
-
-    @Bean
-    public JedisUtil redisUtil() {
-        return new JedisUtil();
     }
 }

@@ -11,6 +11,7 @@
         <module>easysui-cache</module>
         <module>easysui-common</module>
         <module>easysui-core</module>
+        <module>easysui-distribute-id</module>
         <module>easysui-distribute-lock</module>
         <module>easysui-dubbo</module>
         <module>easysui-http</module>

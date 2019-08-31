@@ -25,10 +25,8 @@ public class ShardingKeyGeneratorTest {
                     for (int j = 0; j < 1000; j++) {
                         Long key = generator.generateKey();
                         System.out.println(key);
+                        set.add(key);
                     }
-
-                    //set.add(key);
-
                 }
             }).start();
 

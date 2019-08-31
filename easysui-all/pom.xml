@@ -23,6 +23,11 @@
         </dependency>
         <dependency>
             <groupId>com.easysui</groupId>
+            <artifactId>easysui-distribute-id</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.easysui</groupId>
             <artifactId>easysui-distribute-lock</artifactId>
             <version>${project.parent.version}</version>
         </dependency>

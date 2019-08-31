@@ -10,7 +10,6 @@ import java.util.Objects;
  * @author CHAO
  */
 @Getter
-@Setter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @ToString
@@ -45,14 +44,6 @@ public class Result<T> implements Serializable {
         return Result.create(ResultEnum.ERROR.getCode(), msg, value);
     }
 
-    public static <T> Result<T> retry(String msg) {
-        return Result.create(ResultEnum.RETRY.getCode(), msg, null);
-    }
-
-    public static <T> Result<T> retry(String msg, T value) {
-        return Result.create(ResultEnum.RETRY.getCode(), msg, value);
-    }
-
     public static <T> Result<T> create(String code, String msg, T value) {
         return new Result<>(code, msg, value);
     }
@@ -63,9 +54,5 @@ public class Result<T> implements Serializable {
 
     public boolean isError() {
         return !isOk();
-    }
-
-    public boolean isRetry() {
-        return Objects.equals(ResultEnum.RETRY.getCode(), this.code);
     }
 }

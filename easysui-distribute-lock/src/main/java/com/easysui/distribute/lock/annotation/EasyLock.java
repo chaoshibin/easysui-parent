@@ -46,5 +46,5 @@ public @interface EasyLock {
     /**
      * 争夺分布式锁失败错误码
      */
-    String code() default "777777";
+    String code() default "999997";
 }

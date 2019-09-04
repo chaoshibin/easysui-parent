@@ -16,7 +16,7 @@
         <module>easysui-dubbo</module>
         <module>easysui-http</module>
         <module>easysui-log</module>
-        <module>easysui-mq</module>
+        <module>easysui-jms</module>
         <module>easysui-mybatis</module>
         <module>easysui-redis</module>
         <module>easysui-validation</module>

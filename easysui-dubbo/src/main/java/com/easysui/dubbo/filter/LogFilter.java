@@ -21,7 +21,6 @@ import java.util.Objects;
  * @author CHAO
  */
 @Slf4j
-@SuppressWarnings("unchecked")
 @Activate(group = {Constants.PROVIDER, Constants.CONSUMER})
 public class LogFilter implements Filter {
     @Override
@@ -30,9 +29,9 @@ public class LogFilter implements Filter {
         Class[] args = invocation.getParameterTypes();
         final Object[] arguments = invocation.getArguments();
         EasyLog easyLog = null;
-        //converterParamsClass(args, arguments);
         String methodName = StringUtils.EMPTY;
         try {
+            @SuppressWarnings("unchecked")
             Method method = clazz.getMethod(invocation.getMethodName(), args);
             easyLog = AnnotationUtils.findAnnotation(method, EasyLog.class);
             methodName = clazz.getName() + "." + method.getName();
@@ -52,16 +51,5 @@ public class LogFilter implements Filter {
             log.error("[{}###异常###] RpcMethod={}, 请求报文={}", easyLog.title(), methodName, text, result.getException());
         }
         return result;
-    }
-
-    private void converterParamsClass(final Class[] args, final Object[] arguments) {
-        if (arguments == null || arguments.length < 1) {
-            return;
-        }
-        for (int i = 0; i < arguments.length; i++) {
-            if (arguments[i] != null) {
-                args[i] = arguments[i].getClass();
-            }
-        }
     }
 }

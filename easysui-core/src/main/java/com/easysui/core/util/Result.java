@@ -29,22 +29,22 @@ public class Result<T> implements Serializable {
     private T value;
 
     public static <T> Result<T> ok(T value) {
-        return Result.create(ResultEnum.OK.getCode(), ResultEnum.OK.getMsg(), value);
+        return Result.of(ResultEnum.OK.getCode(), ResultEnum.OK.getMsg(), value);
     }
 
     public static <T> Result<T> ok(T value, String msg) {
-        return Result.create(ResultEnum.OK.getCode(), msg, value);
+        return Result.of(ResultEnum.OK.getCode(), msg, value);
     }
 
     public static <T> Result<T> error(String msg) {
-        return Result.create(ResultEnum.ERROR.getCode(), msg, null);
+        return Result.of(ResultEnum.ERROR.getCode(), msg, null);
     }
 
     public static <T> Result<T> error(T value, String msg) {
-        return Result.create(ResultEnum.ERROR.getCode(), msg, value);
+        return Result.of(ResultEnum.ERROR.getCode(), msg, value);
     }
 
-    public static <T> Result<T> create(String code, String msg, T value) {
+    public static <T> Result<T> of(String code, String msg, T value) {
         return new Result<>(code, msg, value);
     }
 

@@ -35,7 +35,7 @@ public class ValidationUtil {
                     }
                     builder.append(v.getMessage());
                 }
-                return Result.error(builder.toString(), StringUtils.EMPTY);
+                return Result.error(builder.toString());
             }
         }
         return Result.ok(StringUtils.EMPTY);

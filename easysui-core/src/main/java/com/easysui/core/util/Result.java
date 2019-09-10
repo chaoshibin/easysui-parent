@@ -32,7 +32,7 @@ public class Result<T> implements Serializable {
         return Result.create(ResultEnum.OK.getCode(), ResultEnum.OK.getMsg(), value);
     }
 
-    public static <T> Result<T> ok(String msg, T value) {
+    public static <T> Result<T> ok(T value, String msg) {
         return Result.create(ResultEnum.OK.getCode(), msg, value);
     }
 
@@ -40,7 +40,7 @@ public class Result<T> implements Serializable {
         return Result.create(ResultEnum.ERROR.getCode(), msg, null);
     }
 
-    public static <T> Result<T> error(String msg, T value) {
+    public static <T> Result<T> error(T value, String msg) {
         return Result.create(ResultEnum.ERROR.getCode(), msg, value);
     }
 

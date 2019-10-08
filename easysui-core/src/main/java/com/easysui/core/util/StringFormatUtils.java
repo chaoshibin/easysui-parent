@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * @author CHAO 2019/5/21 12:29
+ * @author Chao Shibin 2019/5/21 12:29
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class StringFormatUtils {

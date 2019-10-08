@@ -11,7 +11,7 @@ import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
- * @author CHAO
+ * @author Chao Shibin
  */
 @Configuration
 @ConditionalOnClass({RedisOperations.class})

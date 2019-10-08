@@ -7,7 +7,7 @@ import com.esotericsoftware.kryo.io.Output;
 import com.esotericsoftware.kryo.serializers.BeanSerializer;
 
 /**
- * @author CHAO 2019/5/14 1:31
+ * @author Chao Shibin 2019/5/14 1:31
  */
 public class KryoSerializerOrNull implements Serializer {
     /**

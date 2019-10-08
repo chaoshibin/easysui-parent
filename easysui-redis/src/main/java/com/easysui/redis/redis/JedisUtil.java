@@ -7,7 +7,7 @@ import redis.clients.jedis.JedisPool;
 import java.util.Objects;
 
 /**
- * @author CHAO 2019/5/17 0:44
+ * @author Chao Shibin 2019/5/17 0:44
  */
 @Deprecated
 public final class JedisUtil {

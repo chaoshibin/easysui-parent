@@ -1,7 +1,7 @@
 package com.easysui.redis.service;
 
 /**
- * @author CHAO 2019/5/20 23:50
+ * @author Chao Shibin 2019/5/20 23:50
  */
 public interface RedisService {
 

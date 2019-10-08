@@ -5,7 +5,7 @@ package com.easysui.distribute.id;
  *
  * </p>
  *
- * @author CHAO
+ * @author Chao Shibin
  * @since 2019/7/10
  **/
 public interface ShardingKeyGenerator<T> {

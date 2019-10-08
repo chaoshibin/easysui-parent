@@ -8,7 +8,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 
 /**
- * @author CHAO 2019/5/14 1:58
+ * @author Chao Shibin 2019/5/14 1:58
  */
 public class KryoSerializer {
     private final static ThreadLocal<Kryo> KRYO_THREAD_LOCAL = ThreadLocal.withInitial(() -> {

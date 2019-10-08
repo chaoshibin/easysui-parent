@@ -3,7 +3,7 @@ package com.easysui.distribute.lock.service;
 import com.easysui.distribute.lock.enums.LockEnum;
 
 /**
- * @author CHAO 2019/5/16 16:05
+ * @author Chao Shibin 2019/5/16 16:05
  */
 public interface DistributeLockService {
 

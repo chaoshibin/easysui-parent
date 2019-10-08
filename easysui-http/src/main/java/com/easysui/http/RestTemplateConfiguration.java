@@ -20,7 +20,7 @@ import java.util.List;
 
 
 /**
- * @author CHAO
+ * @author Chao Shibin
  */
 @Slf4j
 @ConditionalOnProperty(prefix = "easysui.http", name = "enabled", havingValue = "true")

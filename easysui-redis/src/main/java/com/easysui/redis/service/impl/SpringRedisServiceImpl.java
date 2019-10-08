@@ -11,7 +11,7 @@ import javax.annotation.Resource;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author CHAO 2019/5/20 23:52
+ * @author Chao Shibin 2019/5/20 23:52
  */
 public class SpringRedisServiceImpl implements RedisService {
     @Resource(name = "redisTemplate")

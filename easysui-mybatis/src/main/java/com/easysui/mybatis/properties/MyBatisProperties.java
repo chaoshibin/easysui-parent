@@ -12,7 +12,7 @@ import lombok.ToString;
  * config-location : classpath:mybatis-config.xml
  * base-package : com.ring.core.mapper
  *
- * @author CHAO
+ * @author Chao Shibin
  */
 @Getter
 @Setter

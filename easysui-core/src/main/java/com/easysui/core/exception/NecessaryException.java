@@ -5,7 +5,7 @@ package com.easysui.core.exception;
  *
  * </p>
  *
- * @author chao
+ * @author Chao Shibin
  * @since 2019/8/28
  **/
 public class NecessaryException extends RuntimeException {

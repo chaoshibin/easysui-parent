@@ -5,7 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * @author CHAO 2019/5/19 2:16
+ * @author Chao Shibin 2019/5/19 2:16
  */
 @Getter
 @Setter

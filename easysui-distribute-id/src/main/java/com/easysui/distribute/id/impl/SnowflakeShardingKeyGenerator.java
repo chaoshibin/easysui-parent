@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
  * 雪花算法，使用zookeeper临时顺序节点获取workerId
  * </p>
  *
- * @author CHAO
+ * @author Chao Shibin
  * @since 2019/7/10
  **/
 @Slf4j

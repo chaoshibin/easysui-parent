@@ -9,8 +9,8 @@ import lombok.ToString;
  * 功能描述:
  * <p/>
  *
- * @author CHAO 新增日期：2018/2/11
- * @author CHAO 修改日期：2018/2/11
+ * @author Chao Shibin 新增日期：2018/2/11
+ * @author Chao Shibin 修改日期：2018/2/11
  * @version 1.0.0
  * @since 1.0.0
  */

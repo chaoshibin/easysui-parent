@@ -16,6 +16,7 @@ import lombok.experimental.Accessors;
 @Setter
 @ToString
 @Accessors(chain = true)
-public class SuperStudent {
+public abstract class SuperStudent {
     private String word;
+    private String country;
 }

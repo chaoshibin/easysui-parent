@@ -6,7 +6,7 @@ import org.apache.zookeeper.CreateMode;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * @author CHAO 2019/5/19 1:10
+ * @author Chao Shibin 2019/5/19 1:10
  */
 public class ZkUtil {
     @Autowired

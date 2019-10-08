@@ -4,7 +4,7 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 /**
- * @author CHAO 2019/5/21 20:30
+ * @author Chao Shibin 2019/5/21 20:30
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class StrConst {

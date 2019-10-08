@@ -1,7 +1,7 @@
 package com.easysui.cache.serialize;
 
 /**
- * @author CHAO 2019/5/14 1:29
+ * @author Chao Shibin 2019/5/14 1:29
  */
 
 public interface Serializer {

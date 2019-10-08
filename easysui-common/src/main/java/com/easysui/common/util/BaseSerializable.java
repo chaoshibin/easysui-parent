@@ -9,7 +9,7 @@ import java.io.Serializable;
  * 功能描述:
  * <p/>
  *
- * @author CHAO 新增日期：2018/9/19
+ * @author Chao Shibin 新增日期：2018/9/19
  * @since 1.0.0
  */
 public abstract class BaseSerializable implements Serializable {

@@ -14,7 +14,7 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 /**
- * @author CHAO 2019/4/16
+ * @author Chao Shibin 2019/4/16
  */
 public class AspectUtil {
 

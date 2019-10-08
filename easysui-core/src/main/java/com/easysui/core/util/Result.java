@@ -7,22 +7,25 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * @author CHAO
+ * @author Chao Shibin
  */
 @Getter
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @ToString
 public class Result<T> implements Serializable {
     private static final long serialVersionUID = 1L;
+    public static final Result SYSTEM_ERROR = Result.of(ResultEnum.INTERNAL_SERVER_ERROR);
+
     /**
      * 状态码
      */
     private String code;
+
     /**
      * 消息明细
      */
     private String msg;
+
     /**
      * 结果对象
      */
@@ -46,6 +49,10 @@ public class Result<T> implements Serializable {
 
     public static <T> Result<T> of(String code, String msg, T value) {
         return new Result<>(code, msg, value);
+    }
+
+    public static <T> Result<T> of(ResultEnum resultEnum) {
+        return Result.of(resultEnum.getCode(), resultEnum.getMsg(), null);
     }
 
     public boolean isOk() {

@@ -9,7 +9,7 @@ import java.util.UUID;
  *
  * </p>
  *
- * @author CHAO
+ * @author Chao Shibin
  * @since 2019/7/10
  **/
 public class UUIDShardingKeyGenerator implements ShardingKeyGenerator<String> {

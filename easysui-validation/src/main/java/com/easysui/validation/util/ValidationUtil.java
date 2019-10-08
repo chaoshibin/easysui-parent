@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * @author CHAO 2019/4/17
+ * @author Chao Shibin 2019/4/17
  */
 @Slf4j
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -29,7 +29,7 @@ public class ValidationUtil {
             if (CollectionUtils.isNotEmpty(validateSet)) {
                 StringBuilder builder = new StringBuilder();
                 for (ConstraintViolation<T> v : validateSet) {
-                    log.info("前置参数校验-校验到异常参数 {}={}", v.getPropertyPath().toString(), v.getMessage());
+                    log.warn("前置参数校验-校验到异常参数 {}={}", v.getPropertyPath().toString(), v.getMessage());
                     if (builder.length() > 0) {
                         builder.append("|");
                     }

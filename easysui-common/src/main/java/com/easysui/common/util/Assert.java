@@ -5,7 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * <p/>
  *
- * @author CHAO
+ * @author Chao Shibin
  * @since 2018/2/11
  */
 public final class Assert {

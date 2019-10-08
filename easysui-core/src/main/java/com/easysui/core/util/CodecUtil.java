@@ -13,7 +13,7 @@ import java.util.UUID;
 /**
  * 编码与解码操作工具类
  *
- * @author CHAO
+ * @author Chao Shibin
  */
 public final class CodecUtil {
 

@@ -14,7 +14,7 @@ import org.springframework.core.annotation.Order;
 import java.util.Arrays;
 
 /**
- * @author CHAO 2019/4/16
+ * @author Chao Shibin 2019/4/16
  */
 @Slf4j
 @Aspect

@@ -26,7 +26,9 @@ public class Student extends SuperStudent {
     public static void main(String[] args) {
         Student student = (Student) Student.of()
                 .setName("")
-                .setAge(12).setWord("");
+                .setAge(12)
+                .setWord("")
+                .setCountry("China");
         System.out.println(student);
     }
 }

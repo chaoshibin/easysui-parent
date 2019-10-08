@@ -5,7 +5,7 @@ import com.easysui.distribute.lock.service.DistributeLockService;
 import com.easysui.redis.redis.RedisUtil;
 
 /**
- * @author CHAO 2019/5/16 17:20
+ * @author Chao Shibin 2019/5/16 17:20
  */
 public class RedisDistributeLockServiceImpl implements DistributeLockService {
     @Override

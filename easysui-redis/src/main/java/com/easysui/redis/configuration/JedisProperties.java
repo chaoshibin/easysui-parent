@@ -5,7 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * @author CHAO 2019/5/17 0:40
+ * @author Chao Shibin 2019/5/17 0:40
  * @deprecated 使用spring提供的RedisTemplate
  */
 @Getter

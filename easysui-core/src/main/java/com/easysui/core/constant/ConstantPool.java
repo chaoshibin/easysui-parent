@@ -4,7 +4,7 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 /**
- * @author CHAO 2019/6/22 22:43
+ * @author Chao Shibin 2019/6/22 22:43
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class ConstantPool {
@@ -15,5 +15,5 @@ public final class ConstantPool {
     /**
      * 请求唯一标识
      */
-    public static final String REQUEST_ID = "requestID";
+    public static final String REQUEST_ID = "requestId";
 }

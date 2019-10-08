@@ -9,7 +9,7 @@ import java.util.HashSet;
  *
  * </p>
  *
- * @author CHAO
+ * @author Chao Shibin
  * @since 2019/7/11
  **/
 public class ShardingKeyGeneratorTest {

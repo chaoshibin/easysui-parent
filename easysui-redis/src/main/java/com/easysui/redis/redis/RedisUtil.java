@@ -14,7 +14,7 @@ import java.util.Collections;
 import java.util.Objects;
 
 /**
- * @author CHAO 2019/5/20 1:48
+ * @author Chao Shibin 2019/5/20 1:48
  */
 @Slf4j
 @NoArgsConstructor(access = AccessLevel.PRIVATE)

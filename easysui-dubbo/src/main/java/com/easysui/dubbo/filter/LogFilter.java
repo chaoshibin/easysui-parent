@@ -18,7 +18,7 @@ import java.lang.reflect.Method;
 import java.util.Objects;
 
 /**
- * @author CHAO
+ * @author Chao Shibin
  */
 @Slf4j
 @Activate(group = {Constants.PROVIDER, Constants.CONSUMER})
@@ -48,7 +48,7 @@ public class LogFilter implements Filter {
         Result result = invoker.invoke(invocation);
         log.info("[{}] RpcMethod={}, 请求报文={}, 响应报文={}, 耗时{}", easyLog.title(), methodName, text, result.getValue(), stopWatch);
         if (result.hasException()) {
-            log.error("[{}###异常###] RpcMethod={}, 请求报文={}", easyLog.title(), methodName, text, result.getException());
+            log.error("[{}###异常###] RpcMethod={}, 请求报文={}, 耗时{}", easyLog.title(), methodName, text, stopWatch, result.getException());
         }
         return result;
     }

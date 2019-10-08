@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author CHAO on 2017/7/10
+ * @author Chao Shibin on 2017/7/10
  * 常用注解
  * @see: @JsonIgnoreProperties(ignoreUnknown = true)
  * @see: @JsonIgnore 此注解用于属性上，作用是进行JSON操作时忽略该属性。

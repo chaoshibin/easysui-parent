@@ -24,7 +24,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import javax.sql.DataSource;
 
 /**
- * @author CHAO
+ * @author Chao Shibin
  */
 @Slf4j
 @Configuration

@@ -12,7 +12,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 
 /**
- * @author CHAO 2019/5/18 23:18
+ * @author Chao Shibin 2019/5/18 23:18
  */
 @Slf4j
 @ConditionalOnProperty(prefix = "easysui.zookeeper", name = "enabled", havingValue = "true")

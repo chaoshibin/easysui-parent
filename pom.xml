@@ -41,7 +41,7 @@
         <lombok.version>1.18.8</lombok.version>
         <aspectjweaver.version>1.9.2</aspectjweaver.version>
         <aspectjrt.version>1.9.2</aspectjrt.version>
-        <jackson-databind.version>2.9.6</jackson-databind.version>
+        <jackson-databind.version>2.9.10.3</jackson-databind.version>
         <slf4j-api.version>1.7.25</slf4j-api.version>
         <spring.version>5.1.6.RELEASE</spring.version>
         <hibernate-validator.version>6.0.16.Final</hibernate-validator.version>

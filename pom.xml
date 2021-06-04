@@ -44,7 +44,7 @@
         <jackson-databind.version>2.9.6</jackson-databind.version>
         <slf4j-api.version>1.7.25</slf4j-api.version>
         <spring.version>5.1.6.RELEASE</spring.version>
-        <hibernate-validator.version>6.0.16.Final</hibernate-validator.version>
+        <hibernate-validator.version>6.0.20.Final</hibernate-validator.version>
         <kryo.version>4.0.1</kryo.version>
         <kryo-serializers.version>0.42</kryo-serializers.version>
         <jeids.version>2.10.2</jeids.version>

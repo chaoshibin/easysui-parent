@@ -51,7 +51,7 @@
         <spring-boot.version>2.1.4.RELEASE</spring-boot.version>
         <curator-recipes.version>4.0.1</curator-recipes.version>
         <zkclient.version>0.10</zkclient.version>
-        <dubbo.version>2.6.2</dubbo.version>
+        <dubbo.version>2.6.12</dubbo.version>
     </properties>
     <dependencyManagement>
         <dependencies>
